@@ -12,7 +12,7 @@
     fill: luma(95%),
     inset: 8pt,
     radius: 0pt,
-    stroke: 0.5pt + blue.lighten(80%),
+    stroke: 1pt + purple.lighten(80%),
     raw(..body, lang: "haskell")
   )
 }
@@ -172,7 +172,6 @@ elementosEnPosicionesPares (x:xs) =
                                   if null xs
                                   then [x]
                                   else x : elementosEnPosicionesPares (tail xs)
---De elementosEnPosicionesPares preguntar una forma no tan rebuscada!
 
 entrelazar :: [a] -> [a] -> [a]
 entrelazar [] = id
@@ -189,13 +188,15 @@ No son estructurales polque son explícitos
 Forma estructural:
 
 #haskell("
+--De elementosEnPosicionesPares preguntar una forma no tan rebuscada!
 elementosEnPosicionesPares :: Num a => [a] -> [a]
 elementosEnPosicionesPares xs =
               foldr (\(i, x) acc -> if even i then x:acc else acc) [] (zip [1..] xs)
 
--- idea inicial, falta agregar los que elimina el zip. Otra idea es hacer un zip custom que devuelva ambas cosas y ya.
+-- preguntar también una forma menos rebuscada.
 entrelazar :: [a] -> [a] -> [a]
-entrelazar xs ys = foldr (\(x, y) acc -> x : y : acc) [] (zip xs ys)
+entrelazar xs ys = 
+    foldr (\(x, y) acc -> x:y:acc) [] (zip xs ys) ++ (drop (length ys) xs ++ drop (length xs) ys)
 ")
 #ej()[
   El siguiente esquema captura la recursión primitiva sobre listas.
@@ -211,6 +212,18 @@ Definr la función insertarOrdenado :: Ord a => a -> [a] -> [a] que inserta un e
 ordenada (de manera creciente), de manera que se preserva el ordenamiento.
 ]
 
+#haskell("sacarUna :: Eq a => a -> [a] -> [a]
+sacarUna e = recr (\x xs acc -> if e == x then xs else x:acc) []")
+
+Es inadecuado el uso de foldr ya que necesitamos poder "ver" el resto de la lista de forma directa, se puede pero es más engorroso.
+
+#haskell("
+enMedio :: Ord a => a -> a -> a -> Bool
+enMedio x e x' = x <= e && e <= x'
+
+insertarOrdenado :: Ord a => a -> [a] -> [a]
+insertarOrdenado e = recr (\x xs acc -> if enMedio x e (head xs) then x:e:xs else x:acc) []")
+
 #ej()[Definir las siguientes funciones para trabajar sobre listas, y dar su tipo. Todas ellas deben poder aplicarse a
 listas *finitas *e* infitas*.][mapPares, una versión de map que toma una función currificada de dos argumentos y una lista de pares
 de valores, y devuelve la lista de aplicaciones de la función a cada par. *Pista:* recordar curry y uncurry.][
@@ -223,6 +236,17 @@ Haskell se llama zip. Pista: aprovechar la currificación y utilizar evaluación
 (de igual longitud), y devuelve una lista de aplicaciones de la función a cada elemento correspondiente de
 las dos listas. Esta función en Haskell se llama zipWith.
 ]
+
+#haskell("mapPares :: (a -> b -> c) -> [(a, b)] -> [c]
+mapPares f = foldr (\(x,y) acc -> f x y:acc) []
+
+--armarPares :: [a] -> [b] -> [(a,b)]
+
+-- esta sería con armar pares!
+mapDoble :: (a -> b -> c) -> [a] -> [b] -> [c]
+mapDoble f xs ys = foldr (\(x,y) acc -> f x y : acc) [] (zip xs ys)
+")
+
 #ej()
 
 #ej()[Definir y dar el tipo del esquema de recursión foldNat sobre los naturales. Utilizar el tipo Integer de
