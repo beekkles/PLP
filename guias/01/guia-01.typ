@@ -145,7 +145,11 @@ sumasParciales [] = []
 sumasParciales [x] = [x]
 sumasParciales (x:y:xs) = x : sumasParciales ((x+y):xs)
 
--- Falta migrarla a estructural
+-- ver un esquema más sencillo
+
+sumasParciales :: Num a => [a] -> [a]
+sumasParciales xs = map (\i -> sum (take i xs)) [1..length xs]
+
 ")
 
 == IV.
@@ -188,12 +192,10 @@ No son estructurales polque son explícitos
 Forma estructural:
 
 #haskell("
---De elementosEnPosicionesPares preguntar una forma no tan rebuscada!
 elementosEnPosicionesPares :: Num a => [a] -> [a]
 elementosEnPosicionesPares xs =
               foldr (\(i, x) acc -> if even i then x:acc else acc) [] (zip [1..] xs)
 
--- preguntar también una forma menos rebuscada.
 entrelazar :: [a] -> [a] -> [a]
 entrelazar xs ys = 
     foldr (\(x, y) acc -> x:y:acc) [] (zip xs ys) ++ (drop (length ys) xs ++ drop (length xs) ys)
@@ -240,11 +242,13 @@ las dos listas. Esta función en Haskell se llama zipWith.
 #haskell("mapPares :: (a -> b -> c) -> [(a, b)] -> [c]
 mapPares f = foldr (\(x,y) acc -> f x y:acc) []
 
---armarPares :: [a] -> [b] -> [(a,b)]
+armarPares :: [a] -> [b] -> [(a,b)]
+armarPares [] _ = []
+armarPares _ [] = []
+armarPares (x:xs) (y:ys) = (x,y):armarPares xs ys
 
--- esta sería con armar pares!
 mapDoble :: (a -> b -> c) -> [a] -> [b] -> [c]
-mapDoble f xs ys = foldr (\(x,y) acc -> f x y : acc) [] (zip xs ys)
+mapDoble f xs ys = foldr (\(x,y) acc -> f x y : acc) [] (armarPares xs ys)
 ")
 
 #ej()
