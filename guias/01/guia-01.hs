@@ -1,4 +1,8 @@
 --3-------------------------------------------------------------------------------
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Use map" #-}
+{-# HLINT ignore "Use sum" #-}
+
 sum' :: Num a => [a] -> a
 sum' = foldr1 (+)
 
@@ -70,21 +74,25 @@ mapDoble _ _ []           = []
 mapDoble f (x:xs) (y:ys)  = f x y : mapDoble f xs ys
 
 --9--------------------------------------------------------------------------------
-data Nat = Cero | Succ Nat 
+data Nat = Cero | Succ Nat
   deriving Show
 
-foldNat :: b -> (b -> b) -> Nat -> b
-foldNat z _ Cero     = z
-foldNat z f (Succ a) = f (foldNat z f a)
+foldNat :: (b -> b) -> b -> Nat -> b
+foldNat _ z Cero     = z
+foldNat f z (Succ a) = f (foldNat f z a)
 
 sumNat :: Nat -> Nat -> Nat
-sumNat Cero _            = Cero
-sumNat _ Cero            = Cero
-sumNat (Succ a) (Succ b) = foldNat (Succ a) Succ (Succ b)
+sumNat Cero b            = b
+sumNat a Cero            = a
+sumNat (Succ a) (Succ b) = foldNat Succ (Succ a) (Succ b)
 
 mulNat :: Nat -> Nat -> Nat
-mulNat a (Succ Cero)     = a
-mulNat a (Succ b)        = sumNat a (mulNat a b)
+mulNat a = foldNat (sumNat a) Cero
 
 potNat :: Nat -> Nat -> Nat
-potNat p = foldNat (Succ Cero) (mulNat p)
+potNat p = foldNat (mulNat p) (Succ Cero)
+
+--10--------------------------------------------------------------------------------
+
+genLista :: a -> (a -> a) -> Integer -> [a]
+genLista start f size = foldr (\ _ g -> \x -> x : g (f y))  (const []) [1..size] start
