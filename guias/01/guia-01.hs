@@ -95,4 +95,58 @@ potNat p = foldNat (mulNat p) (Succ Cero)
 --10--------------------------------------------------------------------------------
 
 genLista :: a -> (a -> a) -> Integer -> [a]
-genLista start f size = foldr (\ _ g -> \x -> x : g (f y))  (const []) [1..size] start
+genLista start f size = foldr (\ _ g x -> x : g (f x))  (const []) [1..size] start
+
+--11--------------------------------------------------------------------------------
+
+data Polinomio a = X
+                  | Cte a
+                  | Suma (Polinomio a) (Polinomio a)
+                  | Prod (Polinomio a) (Polinomio a)
+
+evaluar :: Num a => a -> Polinomio a -> a
+evaluar e X = e
+evaluar e (Cte x) = x
+evaluar e (Suma p q) = evaluar e p + evaluar e q
+evaluar e (Prod p q) = evaluar e p * evaluar e q
+
+--12--------------------------------------------------------------------------------
+data AB a = Nil | Bin (AB a) a (AB a)
+  deriving Show
+
+
+arbolEjemplo :: AB Int
+arbolEjemplo = Bin (Bin (Bin Nil 3 Nil) 
+                    5 
+                    (Bin Nil 7 Nil))
+                10 
+                (Bin (Bin Nil 12 Nil) 
+                      15 
+                      (Bin Nil 20 Nil))
+
+foldAB :: (b -> a -> b -> b) -> b -> AB a -> b
+foldAB _ z Nil = z
+foldAB f z (Bin i c r) = f (foldAB f z i) c (foldAB f z r)
+
+recAB :: (AB a -> a -> AB a -> b -> b) -> b -> AB a -> b
+recAB _ z Nil = z
+recAB f z (Bin i c r) = f i c r (recAB f z r)
+
+esNil :: AB a -> Bool
+esNil Nil = True
+esNil _ = False
+
+altura :: AB a -> Integer
+altura = foldAB (\i _ r -> 1 + max i r) 0
+
+cantNodos :: AB a -> Integer
+cantNodos = foldAB (\i _ r -> i+1+r) 0
+
+mejorSegun :: (a -> a -> Bool) -> AB a -> a
+mejorSegun
+
+--13--------------------------------------------------------------------------------
+
+--14--------------------------------------------------------------------------------
+
+--15--------------------------------------------------------------------------------
