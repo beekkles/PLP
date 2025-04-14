@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>clase</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<p>qpq</p>
+<p><span class="math display">\[\begin{array}{r}
+\ length2\  = \ length1\  \\
+length2\ \underset{\left\{ L2 \right\}}{=} = \text{ foldr
+(\textbackslash\_ res } \rightarrow \ 1+res)\  \\
+\text{Por extensionalidad, basta con probar }\forall\text{ xs
+}\ldots\lbrack a\rbrack \\
+\text{Por inducción en xs} \\
+P\left( \text{xs} \right):\left( \text{foldr (\textbackslash\_ res }
+\rightarrow \ 1+res)\ 0 \right)\text{ xs } = \ length1\ xs\
+\end{array}\]</span></p>
+<p>Caso base:</p>
+<p><span class="math display">\[\begin{array}{r}
+\text{ foldr (\textbackslash\_ res } \rightarrow \ 1+res)\ 0\
+\lbrack\rbrack\ \underset{\left\{ F0 \right\}}{=} \\
+length1\ \lbrack\rbrack\underset{\left\{ L10 \right\}}{=}0
+\end{array}\]</span></p>
+<p>Paso inductivo xs = y:ys:</p>
+<p><span class="math display">\[\begin{array}{r}
+\text{ HI} = P\left( \text{ys} \right)\text{ foldr(\textbackslash\_
+res  } \rightarrow \ 1+res\ 0)\ ys\  = \ length1\ ys \\
+\text{TI}:P\left( \text{y:ys} \right)
+\end{array}\]</span></p>
+<p><span class="math display">\[\begin{array}{r}
+\text{ foldr(\textbackslash\_ res } \rightarrow \ 1+res)\ 0\ (y:ys)\  =
+\ length1\ (y:ys)\  \\
+\underset{\left\{ F1 \right\}}{=}\text{ (\textbackslash\_ res }
+\rightarrow \ 1+res)\ y\ (foldr\ (\backslash\_\ res\ -&gt;\ 1+res)\ 0\
+ys) \\
+\underset{2\beta}{=}\ 1+foldr\ (\backslash\_\ res\ -&gt;\ 1+res)\ 0\ ys\
+\underset{\left\{ \text{HI} \right\}}{=}\ 1+length1\ ys\
+\underset{\left\{ L11 \right\}}{=}\ length1\ (y:ys)\square
+\end{array}\]</span></p>
+<hr />
+<p><img src="image.png" /></p>
+<p>Por inducción en ys:</p>
+<hr />
+<p><strong>Caso ys = [ ]</strong></p>
+<p>P([ ]) = elem e [ ] <span class="math inline">\(\Rightarrow\)</span>
+e <span class="math inline">\(\leq\)</span> maximum [ ]</p>
+<p>elem e [ ] <span class="math inline">\(\underset{\left\{ E0
+\right\}}{=}\)</span> False</p>
+<p>Por Bool, la implicación es verdadera.</p>
+<hr />
+<p><strong>Caso ys = x:xs</strong></p>
+<p>HI = P(xs)</p>
+<p>qvq <span class="math inline">\(\forall\)</span> e:: a, elem e (x:xs)
+<span class="math inline">\(\Rightarrow\)</span> e <span
+class="math inline">\(\leq\)</span> maximum (x:xs)</p>
+<p><span class="math inline">\(\underset{\left\{ E1
+\right\}}{=}\)</span> e == x || elem e xs <span
+class="math inline">\(\Rightarrow\)</span> e <span
+class="math inline">\(\leq\)</span> maximum (x:xs)</p>
+<p>L.G. Bool <span class="math inline">\(\Rightarrow\)</span> e==x =
+True <span class="math inline">\(\vee\)</span> e==x = False</p>
+<p>L.G. Listas <span class="math inline">\(\Rightarrow\)</span> xs = [ ]
+<span class="math inline">\(\vee\)</span> xs = z:zs</p>
+<hr />
+<p>Caso e==x = True <span class="math inline">\(\Rightarrow\)</span> xs
+= [ ]</p>
+<p><span class="math inline">\(\star \underset{\left\{ \text{Bool}
+\right\}}{=}\)</span> = True <span
+class="math inline">\(\Rightarrow\)</span> e <span
+class="math inline">\(\leq\)</span> maximum (x [ ])</p>
+<p><span class="math inline">\(\underset{\left\{ \text{Bool}
+\right\}}{=}\)</span> e <span class="math inline">\(\leq\)</span>
+maximum (x [ ])</p>
+<p><span class="math inline">\(\underset{\left\{ M0
+\right\}}{=}\)</span> e <span class="math inline">\(\leq\)</span> x
+<span class="math inline">\(\underset{\left\{ \text{Ord (e==x)}
+\right\}}{=}\)</span> True</p>
+<hr />
+<p>Caso e==x = False <span class="math inline">\(\Rightarrow\)</span> xs
+= [ ]</p>
+<p><span class="math inline">\(\star \underset{\left\{ \text{Bool}
+\right\}}{=}\)</span> elem e [ ] <span
+class="math inline">\(\Rightarrow\)</span> e <span
+class="math inline">\(\leq\)</span> maximum [ ] <span
+class="math inline">\(._{\text{vale por caso base}}\)</span></p>
+<hr />
+<p>Caso e==x = True, xs = z:zs</p>
+<p><span class="math inline">\(\star \underset{\left\{ \text{Bool}
+\right\}}{=}\)</span> e <span class="math inline">\(\leq\)</span>
+maximum (x:z:zs) <span class="math inline">\(\underset{\left\{ M1
+\right\}}{=}\)</span> e <span class="math inline">\(\leq\)</span> if x
+<span class="math inline">\(&lt;\)</span> maximum (z:zs) then maximum
+(z:zs) else x</p>
+<p>L.G. Bool <span class="math inline">\(\Rightarrow\)</span> x <span
+class="math inline">\(&lt;\)</span> maximum (z:zs) es True o False</p>
+<hr />
+<p>Caso True:</p>
+<p>e <span class="math inline">\(\leq\)</span> maximum (z:zs)</p>
+<p>Por HI y e==x = True y Bool:</p>
+<p>e <span class="math inline">\(\leq\)</span> maximum (z:zs)</p>
+<hr />
+</body>
+</html>

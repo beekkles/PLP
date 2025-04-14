@@ -4,7 +4,7 @@
 {-# HLINT ignore "Use sum" #-}
 
 sum' :: Num a => [a] -> a
-sum' = foldr1 (+)
+sum' = sum
 
 elem' :: Eq a => a -> [a] -> Bool
 elem' e = foldr (\x acc -> x==e || acc) False
@@ -116,21 +116,21 @@ data AB a = Nil | Bin (AB a) a (AB a)
 
 
 arbolEjemplo :: AB Int
-arbolEjemplo = Bin (Bin (Bin Nil 3 Nil) 
-                    5 
+arbolEjemplo = Bin (Bin (Bin Nil 3 Nil)
+                    5
                     (Bin Nil 7 Nil))
-                10 
-                (Bin (Bin Nil 12 Nil) 
-                      15 
+                10
+                (Bin (Bin Nil 12 Nil)
+                      15
                       (Bin Nil 20 Nil))
 
 foldAB :: (b -> a -> b -> b) -> b -> AB a -> b
 foldAB _ z Nil = z
 foldAB f z (Bin i c r) = f (foldAB f z i) c (foldAB f z r)
 
-recAB :: (AB a -> a -> AB a -> b -> b) -> b -> AB a -> b
+recAB :: (AB a -> a -> AB a -> b -> b -> b) -> b -> AB a -> b
 recAB _ z Nil = z
-recAB f z (Bin i c r) = f i c r (recAB f z r)
+recAB f z (Bin i c r) = f i c r (recAB f z i) (recAB f z r)
 
 esNil :: AB a -> Bool
 esNil Nil = True
@@ -143,10 +143,34 @@ cantNodos :: AB a -> Integer
 cantNodos = foldAB (\i _ r -> i+1+r) 0
 
 mejorSegun :: (a -> a -> Bool) -> AB a -> a
-mejorSegun
+mejorSegun f (Bin i c r) = foldAB (\i c r -> mejor f c (mejor f i r)) c (Bin i c r)
+  where
+    mejor f x y = if f x y then x else y
 
---13--------------------------------------------------------------------------------
-
---14--------------------------------------------------------------------------------
+esABB :: Ord a => AB a -> Bool
+esABB = recAB (\i c r recI recR -> all (<= c) (abALista i) && all (>= c) (abALista r) && recI && recR) True
+  where
+    abALista = foldAB (\i c r -> i++[c]++r) []
 
 --15--------------------------------------------------------------------------------
+
+data RT a = Nodo a [RT a]
+  deriving (Show, Eq)
+
+rtEj :: RT Int
+rtEj = Nodo 1 [Nodo 2 [Nodo 5 [], Nodo 6 []], Nodo 3 [], Nodo 4 [Nodo 7 []]]
+
+foldRT :: (a -> [b] -> b) -> RT a -> b
+foldRT f (Nodo r hijos) = f r (map (foldRT f) hijos)
+
+hojas :: RT a -> [a]
+hojas = foldRT (\r hijos -> if null hijos then [r] else concat hijos)
+
+distancias :: RT a -> [(a,Int)]
+distancias rt = zip (rtALista rt) (distanciasAux rt)
+  where
+    rtALista =      foldRT (\r hijos -> if null hijos then [r] else concat hijos)
+    distanciasAux = foldRT (\r hijos -> if null hijos then [0] else map (+1) (concat hijos))
+
+alturaRT :: RT a -> Int
+alturaRT = foldRT (\r hijos -> if null hijos then 0 else 1 + maximum hijos)
