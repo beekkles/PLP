@@ -1,10 +1,7 @@
 --3-------------------------------------------------------------------------------
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-{-# HLINT ignore "Use map" #-}
-{-# HLINT ignore "Use sum" #-}
 
 sum' :: Num a => [a] -> a
-sum' = sum
+sum' = foldr1 (+)
 
 elem' :: Eq a => a -> [a] -> Bool
 elem' e = foldr (\x acc -> x==e || acc) False
@@ -112,17 +109,6 @@ evaluar e (Prod p q) = evaluar e p * evaluar e q
 
 --12--------------------------------------------------------------------------------
 data AB a = Nil | Bin (AB a) a (AB a)
-  deriving Show
-
-
-arbolEjemplo :: AB Int
-arbolEjemplo = Bin (Bin (Bin Nil 3 Nil)
-                    5
-                    (Bin Nil 7 Nil))
-                10
-                (Bin (Bin Nil 12 Nil)
-                      15
-                      (Bin Nil 20 Nil))
 
 foldAB :: (b -> a -> b -> b) -> b -> AB a -> b
 foldAB _ z Nil = z
@@ -155,10 +141,6 @@ esABB = recAB (\i c r recI recR -> all (<= c) (abALista i) && all (>= c) (abALis
 --15--------------------------------------------------------------------------------
 
 data RT a = Nodo a [RT a]
-  deriving (Show, Eq)
-
-rtEj :: RT Int
-rtEj = Nodo 1 [Nodo 2 [Nodo 5 [], Nodo 6 []], Nodo 3 [], Nodo 4 [Nodo 7 []]]
 
 foldRT :: (a -> [b] -> b) -> RT a -> b
 foldRT f (Nodo r hijos) = f r (map (foldRT f) hijos)
