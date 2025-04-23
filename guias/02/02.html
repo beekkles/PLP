@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>02</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1>1</h1>
+<p>Sean las siguientes definiciones de funciones:</p>
+<pre><code>{I} intercambiar (x,y) = (y,x)
+{E1} espejar (Left x) = Right x
+{E2} espejar (Right x) = Left x
+{AI} asociarI (x,(y,z)) = ((x,y),z)
+{AD} asociarD ((x,y),z)) = (x,(y,z))
+{F1} flip f x y = f y x
+{C1} curry f x y = f (x,y)
+{UC1} uncurry f (x,y) = f x y
+</code></pre>
+<p>Demostrar las siguientes igualdades usando los lemas de generación
+cuando sea necesario:</p>
+<h2>I. </h2>
+<p><code>∀ p::(a,b) . intercambiar (intercambiar p) = p</code></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por lema de generación de pares, si p :: (a, b), entonces </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- ∃x :: a. ∃y :: b. p = (x, y). llamo a este lema {GP}</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>       intercambiar (intercambiar p)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>{<span class="dt">GP</span>} <span class="ot">=</span> intercambiar (intercambiar (x,y))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>{<span class="dt">I</span>}  <span class="ot">=</span> intercambiar (y,x) <span class="ot">=</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>{<span class="dt">I</span>}  <span class="ot">=</span> (x,y)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>{<span class="dt">GP</span>} <span class="ot">=</span> p</span></code></pre></div>
+<p>Q.E.D.</p>
+<h2>II. </h2>
+<p><code>∀ p::(a,(b,c)) . asociarD (asociarI p) = p</code></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por lema de generación de pares, si p :: (a, d), entonces </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- ∃x :: a. ∃w :: d . p = (x, w). llamo a este lema {GP1}</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        asociarD (asociarI p)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>{<span class="dt">GP1</span>} <span class="ot">=</span> asociarD (asociarI (x, w))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por lema de generación de pares, si p :: (b, c), entonces </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- ∃y :: ∃z :: d . p = (y, z). llamo a este lema {GP2}</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        asociarD (asociarI (x, w))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>{<span class="dt">GP2</span>} <span class="ot">=</span> asociarD (asociarI (x, (y, z)))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>{<span class="dt">AI</span>}  <span class="ot">=</span> asociarD ((x, y), z)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>{<span class="dt">AD</span>}  <span class="ot">=</span> (x, (y, z))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>{<span class="dt">GP1</span>} <span class="ot">=</span> (x, w)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>{<span class="dt">GP2</span>} <span class="ot">=</span> p</span></code></pre></div>
+<p>Q.E.D.</p>
+<h2>III. </h2>
+<p><code>∀ p::Either a b . espejar (espejar p) = p</code></p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">{- Por lema de generación de sumas {GS}, si e :: Either a b, entonces:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">▶ o bien ∃x :: a. p = Left x</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">▶ o bien ∃y :: b. p = Right y</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">-}</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso p = Left x:</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>       espejar (espejar p)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">GS</span>} <span class="ot">=</span> espejar (espejar <span class="dt">Left</span> x)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">E1</span>} <span class="ot">=</span> espejar <span class="dt">Right</span> x</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">E2</span>} <span class="ot">=</span> <span class="dt">Left</span> x</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">GS</span>} <span class="ot">=</span> p</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso p = Right y:</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>         espejar (espejar p)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">GS</span>} <span class="ot">=</span> espejar (espejar <span class="dt">Right</span> y)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">E2</span>} <span class="ot">=</span> espejar <span class="dt">Left</span> y</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">E1</span>} <span class="ot">=</span> <span class="dt">Right</span> y</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">GS</span>} <span class="ot">=</span> p</span></code></pre></div>
+<p>Q.E.D.</p>
+<h2>IV.</h2>
+<p><code>∀ f::a-&gt;b-&gt;c. ∀ x::a. ∀ y::b. flip (flip f) x y = f x y</code></p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">flip</span> (<span class="fu">flip</span> f) x y</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>{<span class="dt">F1</span>} <span class="ot">=</span> (<span class="fu">flip</span> f) y x</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>{<span class="dt">F1</span>} <span class="ot">=</span> f x y</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>QED</p>
+<hr />
+<h2>V.</h2>
+<p><code>∀ f::a-&gt;b-&gt;c. ∀ x::a. ∀ y::b. curry (uncurry f) x y = f x y</code></p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curry</span> (<span class="fu">uncurry</span> f) x y</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>{<span class="dt">C1</span>}  <span class="ot">=</span> (<span class="fu">uncurry</span> f) (x, y) </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>{<span class="dt">UC1</span>} <span class="ot">=</span> f x y</span></code></pre></div>
+<p>QED</p>
+<hr />
+<h1>2</h1>
+<p>Demostrar las siguientes igualdades utilizando el principio de
+extensionalidad funcional:</p>
+<p>con la definición usual de la composición:
+<code>(.) f g x = f (g x)</code>.</p>
+<h2>I. </h2>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">flip</span> <span class="op">.</span> <span class="fu">flip</span> <span class="ot">=</span> <span class="fu">id</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por extensionalidad {EXT} alcanza ver que</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- ∀f::a-&gt;b-&gt;c. ∀x::a. ∀y::b.</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>(<span class="fu">flip</span> <span class="op">.</span> <span class="fu">flip</span>) f x y <span class="ot">=</span> <span class="fu">id</span> f x y</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- Demostración:</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>         (<span class="fu">flip</span> <span class="op">.</span> <span class="fu">flip</span>) f x y</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>{(<span class="op">.</span>)}  <span class="ot">=</span> <span class="fu">flip</span> (<span class="fu">flip</span> f x y)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>{<span class="fu">flip</span>} <span class="ot">=</span> <span class="fu">flip</span> f y x</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>{<span class="fu">flip</span>} <span class="ot">=</span> f x y</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>{<span class="fu">id</span>}   <span class="ot">=</span> <span class="fu">id</span> f x y</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>QED</p>
+<h2>II. </h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>∀<span class="ot"> f::</span>(a,b)<span class="ot">-&gt;</span>c <span class="op">.</span> <span class="fu">uncurry</span> (<span class="fu">curry</span> f) <span class="ot">=</span> f</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por extensionalidad para pares {EXT} alcanza con ver que </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- ∀ f::(a,b)-&gt;c. ∀p :: (a,b) ∃x::a. ∃y::b. p = (x,y) </span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">uncurry</span> (<span class="fu">curry</span> f) (x,y) <span class="ot">=</span> f (x,y)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">--Demostración </span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">uncurry</span> (<span class="fu">curry</span> f) (x,y)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>{<span class="dt">UN1</span>} <span class="ot">=</span> (<span class="fu">curry</span> f) x y </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>{<span class="dt">C1</span>}  <span class="ot">=</span> f (x,y)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>QED</p>
+<h2>III. </h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode hs"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">flip</span> <span class="fu">const</span> <span class="ot">=</span> <span class="fu">const</span> <span class="fu">id</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por extensionalidad alcanza ver que</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- ∀ f::a-&gt;b-c. ∀x::a. ∀y::b.</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">flip</span> <span class="fu">const</span> x y <span class="ot">=</span> <span class="fu">const</span> <span class="fu">id</span> x y</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- Demostración </span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>↓         <span class="fu">flip</span> <span class="fu">const</span> x y</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>↓ {<span class="fu">flip</span>}  <span class="ot">=</span> <span class="fu">const</span> y x</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">const</span>} <span class="ot">=</span> y</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>↑ {<span class="fu">id</span>}    <span class="ot">=</span> <span class="fu">id</span> y</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>↑ {<span class="fu">const</span>} <span class="ot">=</span> (<span class="fu">const</span> <span class="fu">id</span> x) y</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>↑         <span class="ot">=</span> <span class="fu">const</span> <span class="fu">id</span> x y</span></code></pre></div>
+<p>QED</p>
+<h2>IV. </h2>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode hs"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>∀<span class="ot"> f::</span>a<span class="ot">-&gt;</span>b <span class="op">.</span> ∀<span class="ot"> g::</span>b<span class="ot">-&gt;</span>c <span class="op">.</span> ∀<span class="ot"> h::</span>c<span class="ot">-&gt;</span>d <span class="op">.</span> ((h <span class="op">.</span> g) <span class="op">.</span> f) <span class="ot">=</span> (h <span class="op">.</span> (g <span class="op">.</span> f))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por extensionalidad alcanza ver que </span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- ∀ f::a-&gt;b . ∀ g::b-&gt;c . ∀ h::c-&gt;d . ∀x::a</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>((h <span class="op">.</span> g) <span class="op">.</span> f) x <span class="ot">=</span> (h <span class="op">.</span> (g <span class="op">.</span> f)) x</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- Demostración </span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        ((h <span class="op">.</span> g) <span class="op">.</span> f) x</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>{(<span class="op">.</span>)} <span class="ot">=</span> (h <span class="op">.</span> g) (f x)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>{(<span class="op">.</span>)} <span class="ot">=</span> h (g (f x))</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>{(<span class="op">.</span>)} <span class="ot">=</span> h <span class="op">.</span> ((g <span class="op">.</span> f) x)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>{(<span class="op">.</span>)} <span class="ot">=</span> h <span class="op">.</span> (g <span class="op">.</span> f) x</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>QED</p>
+<hr />
+<h1>3</h1>
+<p>Demostrar las siguientes propiedades:</p>
+<h2>I. </h2>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>∀<span class="ot"> xs::</span>[a]<span class="op">.</span> <span class="dt">P</span>(xs)<span class="op">:</span> <span class="fu">length</span> (duplicar xs) <span class="ot">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="fu">length</span> xs</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por inducción sobre listas</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso base P([]): length (duplicar []) = 2 * length []</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>↓         <span class="fu">length</span> (duplicar [])</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>↓ {<span class="dt">D0</span>}  <span class="ot">=</span> <span class="fu">length</span> []</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">L0</span>}  <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>↑ {<span class="dt">INT</span>} <span class="ot">=</span> <span class="dv">2</span><span class="op">*</span><span class="dv">0</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>↑ {<span class="dt">L0</span>}  <span class="ot">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="fu">length</span> []</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">-- Paso inductivo P(x:xs), con HI: P(xs)</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">--qvq</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span> (duplicar (x<span class="op">:</span>xs)) <span class="ot">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="fu">length</span> xs <span class="ot">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="fu">length</span> (x<span class="op">:</span>xs)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co">-- Demostración</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co">--izq</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span> (duplicar (x<span class="op">:</span>xs))</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a> {<span class="dt">D1</span>} <span class="ot">=</span> <span class="fu">length</span> (x<span class="op">:</span>x<span class="op">:</span> duplicar xs)</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>{<span class="dt">L1</span>} <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> (duplicar xs)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>{<span class="dt">INT</span>} <span class="ot">=</span> <span class="dv">2</span> <span class="op">+</span> <span class="fu">length</span> (duplicar xs)</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="co">--der</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> <span class="fu">length</span> (x<span class="op">:</span>xs)</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>{<span class="dt">L1</span>} <span class="ot">=</span> <span class="dv">2</span><span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> xs)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>{<span class="dt">INT</span>} <span class="ot">=</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> (<span class="fu">length</span> xs)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>} <span class="ot">=</span> <span class="dv">2</span> <span class="op">+</span> <span class="fu">length</span> (duplicar xs)</span></code></pre></div>
+<p>QED</p>
+<h2>II. </h2>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>∀<span class="ot"> xs::</span>[a]<span class="op">.</span> ∀<span class="ot"> ys::</span>[a]<span class="op">.</span> <span class="dt">P</span>(xs)<span class="op">:</span> <span class="fu">length</span> (xs <span class="op">++</span> ys) <span class="ot">=</span> <span class="fu">length</span> xs <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- inducción en xs</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso P([]) : length ([] ++ ys) = length [] + length ys</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">--izq</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>         <span class="fu">length</span> ([] <span class="op">++</span> ys)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">0</span>} <span class="ot">=</span> <span class="fu">length</span> ys</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">--der </span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">length</span> [] <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>{<span class="dt">L0</span>}  <span class="ot">=</span> <span class="dv">0</span> <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>{<span class="dt">INT</span>} <span class="ot">=</span> <span class="fu">length</span> ys</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">-- Paso inductivo P(x:xs), con HI P(xs)</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co">--qvq</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span> ((x<span class="op">:</span>xs) <span class="op">++</span> ys) <span class="ot">=</span> <span class="fu">length</span> (x<span class="op">:</span>xs) <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co">--Demostración</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co">--izq</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">length</span> ((x<span class="op">:</span>xs) <span class="op">++</span> ys)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">1</span>} <span class="ot">=</span> <span class="fu">length</span> (x<span class="op">:</span> (xs <span class="op">++</span> ys))</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>{<span class="dt">L1</span>}  <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> (xs <span class="op">++</span> ys)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>}  <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> xs <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co">--der </span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>       <span class="fu">length</span> (x<span class="op">:</span>xs) <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>{<span class="dt">L1</span>} <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> xs <span class="op">+</span> <span class="fu">length</span> ys</span></code></pre></div>
+<p>QED</p>
+<h2>III. </h2>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>∀<span class="ot"> xs::</span>[a]<span class="op">.</span> ∀<span class="ot"> x::</span>a<span class="op">.</span> <span class="dt">P</span>(xs)<span class="op">:</span> append [x] xs <span class="ot">=</span> x<span class="op">:</span>xs</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por inducción en xs </span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso base P([]): append [x] [] = x:[]</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        append [x] []</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>{<span class="dt">A0</span>}  <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">:</span>) [] [x]</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>{<span class="dt">F1</span>}  <span class="ot">=</span> (<span class="op">:</span>) x (<span class="fu">foldr</span> (<span class="op">:</span>) [] [])</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>{<span class="dt">F0</span>}  <span class="ot">=</span> (<span class="op">:</span>) x []</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>{(<span class="op">:</span>)} <span class="ot">=</span> x<span class="op">:</span>[]</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">-- Paso inductivo, con HI P(xs) </span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="dt">P</span>(x&#39;<span class="op">:</span>xs)<span class="op">:</span> append [x] (x&#39;<span class="op">:</span>xs) <span class="ot">=</span> x<span class="op">:</span>x&#39;<span class="op">:</span>xs</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>append [x] (x&#39;<span class="op">:</span>xs)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>{<span class="dt">A0</span>} <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">:</span>) (x&#39;<span class="op">:</span>xs) [x]</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>{<span class="dt">F1</span>} <span class="ot">=</span> (<span class="op">:</span>) x (<span class="fu">foldr</span> (<span class="op">:</span>) (x&#39;<span class="op">:</span>xs) [])</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>{<span class="dt">F0</span>} <span class="ot">=</span> (<span class="op">:</span>) x (x&#39;<span class="op">:</span>xs)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>{(<span class="op">:</span>)} <span class="ot">=</span> x<span class="op">:</span>x&#39;<span class="op">:</span>xs</span></code></pre></div>
+<p>QED</p>
+<h2>IV. </h2>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>∀<span class="ot"> xs::</span>[a]<span class="op">.</span> ∀<span class="ot"> f::</span>(a<span class="ot">-&gt;</span>b)<span class="op">.</span> <span class="dt">P</span>(xs)<span class="op">:</span> <span class="fu">length</span> (<span class="fu">map</span> f xs) <span class="ot">=</span> <span class="fu">length</span> xs</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por inducción en xs </span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso base P([]): length (map f []) = length []</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span> (<span class="fu">map</span> f [])</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>{<span class="dt">M0</span>} <span class="ot">=</span> <span class="fu">length</span> [] </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Paso inductivo, con HI P(xs)</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="dt">P</span>(x<span class="op">:</span>xs)<span class="op">:</span> <span class="fu">length</span> (<span class="fu">map</span> f (x<span class="op">:</span>xs)) <span class="ot">=</span> <span class="fu">length</span> (x<span class="op">:</span>xs)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">-- Demo </span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">-- izq </span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span> (<span class="fu">map</span> f (x<span class="op">:</span>xs)) </span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>{<span class="dt">M1</span>} <span class="ot">=</span> <span class="fu">length</span> (f x <span class="op">:</span> <span class="fu">map</span> f xs) </span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>{<span class="dt">L1</span>} <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> (<span class="fu">map</span> f xs)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">-- der </span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">length</span> (x<span class="op">:</span>xs)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>{<span class="dt">L0</span>} <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> xs</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>} <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> (<span class="fu">map</span> f xs)</span></code></pre></div>
+<p>QED</p>
+<h2>V. </h2>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>∀<span class="ot"> xs::</span>[a]<span class="op">.</span> ∀<span class="ot"> p::</span>a<span class="ot">-&gt;</span><span class="dt">Bool</span><span class="op">.</span> ∀<span class="ot"> e::</span>a<span class="op">.</span> <span class="dt">P</span>(xs)<span class="op">:</span> ((<span class="fu">elem</span> e (<span class="fu">filter</span> p xs)) <span class="ot">=&gt;</span> (<span class="fu">elem</span> e xs)) (asumiendo <span class="dt">Eq</span> a)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- inducción en xs </span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso base P([]): ((elem e (filter p [])) =&gt; (elem e []))</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        (<span class="fu">elem</span> e (<span class="fu">filter</span> p [])) </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FI0</span>} <span class="ot">=</span> <span class="fu">elem</span> e []</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Paso inductivo, con P(xs) de HI </span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="dt">P</span>(x<span class="op">:</span>xs)<span class="op">:</span> ((<span class="fu">elem</span> e (<span class="fu">filter</span> p (x<span class="op">:</span>xs))) <span class="ot">=&gt;</span> (<span class="fu">elem</span> e (x<span class="op">:</span>xs)))</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        (<span class="fu">elem</span> e (<span class="fu">filter</span> p (x<span class="op">:</span>xs))</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FI1</span>} <span class="ot">=</span> ((<span class="fu">elem</span> e (<span class="kw">if</span> p x <span class="kw">then</span> x <span class="op">:</span> (<span class="fu">filter</span> p xs) <span class="kw">else</span> (<span class="fu">filter</span> p xs)))</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">-- por inducción en bools</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso no p x</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>         <span class="fu">elem</span> e (<span class="fu">filter</span> p xs) {<span class="dt">HI</span>} ⇒ <span class="fu">elem</span> e xs</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>{<span class="dt">BOOl</span>} <span class="ot">=</span> <span class="dt">True</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso p x </span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">elem</span> e (x <span class="op">:</span> (<span class="fu">filter</span> p xs))</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>{<span class="dt">E1</span>} <span class="ot">=</span>  <span class="fu">elem</span> e <span class="op">==</span> x <span class="op">|</span> <span class="fu">elem</span> (<span class="fu">filter</span> p xs)</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>} <span class="ot">=&gt;</span> <span class="fu">elem</span> e <span class="op">==</span> x <span class="op">|</span> <span class="fu">elem</span> e xs</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso e == x</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>         <span class="fu">elem</span> e <span class="op">==</span> x <span class="op">|</span> <span class="fu">elem</span> (<span class="fu">filter</span> p xs)</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>{<span class="dt">BOOL</span>} <span class="ot">=</span> <span class="dt">True</span> <span class="op">|</span> <span class="fu">elem</span> (<span class="fu">filter</span> p xs)</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>{<span class="dt">BOOL</span>} <span class="ot">=</span> <span class="dt">True</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso e != x</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="fu">elem</span>   <span class="ot">=</span> e <span class="op">==</span> x <span class="op">|</span> <span class="fu">elem</span> e xs</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>}   <span class="ot">=</span> e <span class="op">==</span> x <span class="op">|</span> <span class="dt">True</span> </span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>{<span class="dt">BOOL</span>} <span class="ot">=</span> <span class="dt">True</span></span></code></pre></div>
+<p>QED</p>
+<h2>VI. </h2>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode hs"><code class="sourceCode haskell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>∀<span class="ot"> xs::</span>[a]<span class="op">.</span> ∀<span class="ot"> x::</span>a<span class="op">.</span> <span class="dt">P</span>(xs)<span class="op">:</span> ponerAlFinal x xs <span class="ot">=</span> xs <span class="op">++</span> (x<span class="op">:</span>[])</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- inducción en xs </span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso base P([]): ponerAlFinal x [] = [] ++ (x:[])</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- izq</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        ponerAlFinal x []</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>{<span class="dt">P0</span>} <span class="ot">=</span> (<span class="fu">foldr</span> (<span class="op">:</span>) (x<span class="op">:</span>[])) []</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>{<span class="dt">F0</span>} <span class="ot">=</span> x<span class="op">:</span>[]</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">-- der </span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        [] <span class="op">++</span> (x<span class="op">:</span>[])</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">0</span>} <span class="ot">=</span> x<span class="op">:</span>[] </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">-- Paso inductivo P(y:xs): ponerAlFinal x (y:xs) = (y:xs) ++ (x:[]), asumo P(xs)</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">-- izq</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        ponerAlFinal x (y<span class="op">:</span>xs)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>{<span class="dt">P0</span>}  <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">:</span>) (x<span class="op">:</span>[]) (y<span class="op">:</span>xs)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>{<span class="dt">F1</span>}  <span class="ot">=</span> (<span class="op">:</span>) y (<span class="fu">foldr</span> (<span class="op">:</span>) (x<span class="op">:</span>[]) xs)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>{(<span class="op">:</span>)} <span class="ot">=</span> y <span class="op">:</span> (<span class="fu">foldr</span> (<span class="op">:</span>) (x<span class="op">:</span>[]) xs)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co">-- der</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>        (y<span class="op">:</span>xs) <span class="op">++</span> (x<span class="op">:</span>[])</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">1</span>} <span class="ot">=</span> y <span class="op">:</span> (xs <span class="op">++</span> x<span class="op">:</span>[])</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>}  <span class="ot">=</span> y <span class="op">:</span> (ponerAlFinal x xs)</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>{<span class="dt">P0</span>}  <span class="ot">=</span> y <span class="op">:</span> (<span class="fu">foldr</span> (<span class="op">:</span>) (x<span class="op">:</span>[]) xs)</span></code></pre></div>
+<p>QED</p>
+<h2>VII. </h2>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode hs"><code class="sourceCode haskell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reverse</span> <span class="ot">=</span> <span class="fu">foldr</span> (\x rec <span class="ot">-&gt;</span> rec <span class="op">++</span> (x<span class="op">:</span>[])) []</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="dt">Por</span> extensionalidad, basta ver que ∀<span class="ot">xs::</span>[a]</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="dt">P</span>(xs)<span class="op">:</span> <span class="fu">reverse</span> xs <span class="ot">=</span> <span class="fu">foldr</span> (\x rec <span class="ot">-&gt;</span> rec <span class="op">++</span> (x<span class="op">:</span>[])) [] xs </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso base P([]): reverse [] = foldr (\x rec -&gt; rec ++ (x:[])) [] []</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">reverse</span> []</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>{<span class="dt">R0</span>}  <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [] []</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FL0</span>} <span class="ot">=</span> []</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FR0</span>} <span class="ot">=</span> <span class="fu">foldr</span> (\x rec <span class="ot">-&gt;</span> rec <span class="op">++</span> (x<span class="op">:</span>[])) [] []</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">-- Paso inductivo, asumo P(xs), qvq</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="dt">P</span>(y<span class="op">:</span>xs)<span class="op">:</span> <span class="fu">reverse</span> (y<span class="op">:</span>xs) <span class="ot">=</span> <span class="fu">foldr</span> (\x rec <span class="ot">-&gt;</span> rec <span class="op">++</span> (x<span class="op">:</span>[])) [] (y<span class="op">:</span>xs) </span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">--izq </span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>          <span class="fu">reverse</span> (y<span class="op">:</span>xs)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>{<span class="dt">R0</span>}    <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [] (y<span class="op">:</span>xs)</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FL1</span>}   <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) ((<span class="fu">flip</span> (<span class="op">:</span>) [] y)) xs</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FLIP</span>}  <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) ((<span class="op">:</span>) y []) xs </span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>{(<span class="op">:</span>)}   <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) (y<span class="op">:</span>[]) xs</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>{}      <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [y] xs</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co">--der </span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">foldr</span> (\x rec <span class="ot">-&gt;</span> rec <span class="op">++</span> (x<span class="op">:</span>[])) [] (y<span class="op">:</span>xs) </span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>{<span class="dt">F1</span>}  <span class="ot">=</span> (\x rec <span class="ot">-&gt;</span> rec <span class="op">++</span> (x<span class="op">:</span>[])) y (<span class="fu">foldr</span> (\x rec <span class="ot">-&gt;</span> rec <span class="op">++</span> (x<span class="op">:</span>[])) [] xs)</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>β     <span class="ot">=</span> (\rec <span class="ot">-&gt;</span> rec <span class="op">++</span> [y]) (<span class="fu">foldr</span> (\x rec <span class="ot">-&gt;</span> rec <span class="op">++</span> (x<span class="op">:</span>[])) [] xs)</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>}  <span class="ot">=</span> (\rec <span class="ot">-&gt;</span> rec <span class="op">++</span> [y]) (<span class="fu">reverse</span> xs)</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>β     <span class="ot">=</span> (<span class="fu">reverse</span> xs) <span class="op">++</span> [y]</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>{<span class="dt">R0</span>}  <span class="ot">=</span> (<span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [] xs) <span class="op">++</span> [y]</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="co">-- Queremos ver que Q(xs): foldl (flip (:)) [y] xs = (foldl (flip (:)) [] xs) ++ [y]</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por inducción </span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso base </span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a><span class="dt">Q</span>([])<span class="op">:</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [y] [] <span class="op">=?</span> (<span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [] []) <span class="op">++</span> [y]</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>        <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [y] []</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FL0</span>} <span class="ot">=</span> [y]</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>        (<span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [] []) <span class="op">++</span> [y]</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FL0</span>} <span class="ot">=</span> [] <span class="op">++</span> [y]</span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">0</span>} <span class="ot">=</span> [y]</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="co">-- Paso inductivo, asumo Q(xs) y qvq </span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="dt">Q</span>(x<span class="op">:</span>xs)<span class="op">:</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [y] (x<span class="op">:</span>xs) <span class="ot">=</span> (<span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [] (x<span class="op">:</span>xs)) <span class="op">++</span> [y]</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="co">-- izq</span></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>         <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [y] (x<span class="op">:</span>xs)</span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FL1</span>}  <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) ((<span class="fu">flip</span> (<span class="op">:</span>)) [y] x) xs</span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FLIP</span>} <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) ((<span class="op">:</span>) x [y]) xs</span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>{(<span class="op">:</span>)}  <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [x,y] xs</span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a><span class="co">-- der </span></span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>         (<span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [] (x<span class="op">:</span>xs)) <span class="op">++</span> [y]</span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FL1</span>}  <span class="ot">=</span> (<span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) ((<span class="fu">flip</span> (<span class="op">:</span>)) [] x) xs) <span class="op">++</span> [y]</span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FLIP</span>} <span class="ot">=</span> (<span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) ((<span class="op">:</span>) x []) xs) <span class="op">++</span> [y]</span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>{(<span class="op">:</span>)}  <span class="ot">=</span> (<span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [x] xs) <span class="op">++</span> [y]</span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a><span class="co">-- hay que probar que ∀x. R(xs): foldl (flip (:)) [x,y] xs = (foldl (flip (:)) [x] xs) ++ [y]</span></span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a><span class="co">-- caso base </span></span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>        <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [x,y] []</span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FL1</span>} <span class="ot">=</span> [x,y]</span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a>        (<span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [x] []) <span class="op">++</span> [y]</span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FL1</span>} <span class="ot">=</span> [x] <span class="op">++</span> [y]</span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">1</span>} <span class="ot">=</span> [x,y]</span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a><span class="co">-- Paso inductivo, vale R(xs), qvq </span></span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a><span class="dt">R</span>(w<span class="op">:</span>xs)<span class="op">:</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [x,y] (w<span class="op">:</span>xs) <span class="ot">=</span> (<span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [x] (w<span class="op">:</span>xs)) <span class="op">++</span> [y]</span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a><span class="co">-- izq</span></span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>        <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [x,y] (w<span class="op">:</span>xs)</span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FL1</span>} <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) (w<span class="op">:</span>[x, y]) xs</span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a><span class="co">{--}</span>  <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [w, x, y] xs</span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a><span class="co">-- der </span></span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a>        <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [x] (w<span class="op">:</span>xs)) <span class="op">++</span> [y]</span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FL1</span>} <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) (w<span class="op">:</span>[x]) xs <span class="op">++</span> [y]</span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a><span class="co">{--}</span>  <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [w,x] xs <span class="op">++</span> [y]</span>
+<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>} <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [w, x, y] xs <span class="ot">=</span> <span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [w,x] xs <span class="op">++</span> [y]</span>
+<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>QED</p>
+<h2>VIII. </h2>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode hs"><code class="sourceCode haskell"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>∀<span class="ot"> xs::</span>[a]<span class="op">.</span> ∀<span class="ot"> x::</span>a<span class="op">.</span> <span class="dt">P</span>(xs)<span class="op">:</span> <span class="fu">head</span> (<span class="fu">reverse</span> (ponerAlFinal x xs)) <span class="ot">=</span> x</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- induccion</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso base P([])</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>         <span class="fu">head</span> (<span class="fu">reverse</span> (ponerAlFinal x []))</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>{<span class="dt">P0</span>}   <span class="ot">=</span> <span class="fu">head</span> (<span class="fu">reverse</span> (<span class="fu">foldr</span> (<span class="op">:</span>) [x] []))</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FR0</span>}  <span class="ot">=</span> <span class="fu">head</span> (<span class="fu">reverse</span> [x]))</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>{<span class="dt">R0</span>}   <span class="ot">=</span> <span class="fu">head</span> (<span class="fu">foldl</span> (<span class="fu">flip</span> (<span class="op">:</span>)) [] [x])</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FL0</span>}  <span class="ot">=</span> <span class="fu">head</span> ([x])</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HEAD</span>} <span class="ot">=</span> x</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">-- Paso inductivo, asumo P(xs)</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="dt">P</span>(y<span class="op">:</span>xs)<span class="op">:</span> <span class="fu">head</span> (<span class="fu">reverse</span> (ponerAlFinal x (y<span class="op">:</span>xs))) <span class="ot">=</span> x</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">head</span> (<span class="fu">reverse</span> (ponerAlFinal x (y<span class="op">:</span>xs)))</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>{<span class="dt">P0</span>}  <span class="ot">=</span> <span class="fu">head</span> (<span class="fu">reverse</span> (<span class="fu">foldr</span> (<span class="op">:</span>) [x] (y<span class="op">:</span>xs))</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FR1</span>} <span class="ot">=</span> <span class="fu">head</span> (<span class="fu">reverse</span> ((<span class="op">:</span>) y (<span class="fu">foldr</span> (<span class="op">:</span>) [x] xs)))</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>{(<span class="op">:</span>)} <span class="ot">=</span> <span class="fu">head</span> (<span class="fu">reverse</span> y <span class="op">:</span> (<span class="fu">foldr</span> (<span class="op">:</span>) [x] xs)))</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">-- Demostramos el  lema: P(xs): foldr (:) [x] xs  = xs ++ [x]</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por inducción </span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso base </span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>         <span class="fu">foldr</span> (<span class="op">:</span>) [x] []</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FR0</span>} <span class="ot">=</span> [x]</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">0</span>} <span class="ot">=</span> [] <span class="op">++</span> [x]</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="co">-- Paso inductivo, asumo P(xs)</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="dt">P</span>(z<span class="op">:</span>xs)<span class="op">:</span> <span class="fu">foldr</span> (<span class="op">:</span>) [x] (z<span class="op">:</span>xs)  <span class="ot">=</span> (z<span class="op">:</span>xs) <span class="op">++</span> [x]</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>        <span class="fu">foldr</span> (<span class="op">:</span>) [x] (z<span class="op">:</span>xs)</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FR1</span>} <span class="ot">=</span> (<span class="op">:</span>) z (<span class="fu">foldr</span> (<span class="op">:</span>) [x] xs)</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>}  <span class="ot">=</span> (<span class="op">:</span>) z (xs <span class="op">++</span> [x])</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>{(<span class="op">:</span>)} <span class="ot">=</span> z <span class="op">:</span> (xs <span class="op">++</span> [x])</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>        (z<span class="op">:</span>xs) <span class="op">++</span> [x]</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">1</span>} <span class="ot">=</span> z <span class="op">:</span> (xs <span class="op">++</span> [x])</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a><span class="co">-- QED, lo llamamos {L1}</span></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a><span class="co">-- Seguimos.</span></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>       <span class="fu">head</span> (<span class="fu">reverse</span> y <span class="op">:</span> (<span class="fu">foldr</span> (<span class="op">:</span>) [x] xs)))</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>{<span class="dt">L1</span>} <span class="ot">=</span> <span class="fu">head</span> (<span class="fu">reverse</span> (y <span class="op">:</span> (xs <span class="op">++</span> [x])))</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a><span class="co">{--}</span> <span class="ot">=</span> <span class="fu">head</span> (<span class="fu">reverse</span> (ws<span class="op">++</span>[x]) <span class="co">-- notamos  (y : (xs ++ [x])) = (ws++[x])</span></span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a><span class="co">-- Probemos que P(ws): (ws++[x]) = ponerAlFinal x ws</span></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="co">-- caso base []</span></span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>        ([]<span class="op">++</span>[x])</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">0</span>} <span class="ot">=</span> [x]</span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>        ponerAlFinal x []</span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>{<span class="dt">P0</span>}  <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">:</span>) [x] []</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FL0</span>} <span class="ot">=</span> [x]</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a><span class="co">-- paso inductivo P(ws): ((w:ws)++[x]) = ponerAlFinal x (w:ws)</span></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a>        ((w<span class="op">:</span>ws)<span class="op">++</span>[x])</span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">1</span>} <span class="ot">=</span> w<span class="op">:</span>(ws<span class="op">++</span>[x])</span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>}  <span class="ot">=</span> w <span class="op">:</span> ponerAlFinal x ws</span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>{<span class="dt">P0</span>}  <span class="ot">=</span> w <span class="op">:</span> (<span class="fu">foldr</span> (<span class="op">:</span>) [x] ws)</span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a>        ponerAlFinal x (w<span class="op">:</span>ws)</span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a>{<span class="dt">P0</span>}  <span class="ot">=</span> <span class="fu">foldr</span> (<span class="op">:</span>) [x] (w<span class="op">:</span>ws)</span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FR1</span>} <span class="ot">=</span> w <span class="op">:</span> (<span class="fu">foldr</span> (<span class="op">:</span>) [x] ws)</span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="co">-- {L2} (ws++[x]) = ponerAlFinal x ws</span></span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="co">-- Seguimos.</span></span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a>       <span class="fu">head</span> (<span class="fu">reverse</span> (ws<span class="op">++</span>[x])</span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a>{<span class="dt">L2</span>} <span class="ot">=</span> <span class="fu">head</span> (<span class="fu">reverse</span> (ponerAlFinal x ws)) </span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>} <span class="ot">=</span> x</span></code></pre></div>
+<p>QED</p>
+<hr />
+<h1>5</h1>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode hs"><code class="sourceCode haskell"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zip</span><span class="ot"> ::</span> [a] <span class="ot">-&gt;</span> [b] <span class="ot">-&gt;</span> [(a,b)]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>{<span class="dt">Z0</span>} <span class="fu">zip</span> <span class="ot">=</span> <span class="fu">foldr</span> (\x rec ys <span class="ot">-&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                   <span class="kw">if</span> <span class="fu">null</span> ys</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                     <span class="kw">then</span> []</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                     <span class="kw">else</span> (x, <span class="fu">head</span> ys) <span class="op">:</span> rec (<span class="fu">tail</span> ys))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                   (<span class="fu">const</span> [])</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="ot">      zip&#39; ::</span> [a] <span class="ot">-&gt;</span> [b] <span class="ot">-&gt;</span> [(a,b)]</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>{<span class="dt">Z&#39;0</span>} zip&#39; [] ys <span class="ot">=</span> []</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>{<span class="dt">Z&#39;1</span>} zip&#39; (x<span class="op">:</span>xs) ys <span class="ot">=</span> <span class="kw">if</span> <span class="fu">null</span> ys <span class="kw">then</span> [] <span class="kw">else</span> (x, <span class="fu">head</span> ys)<span class="op">:</span>zip&#39; xs (<span class="fu">tail</span> ys) </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">-- Demostrar zip = zip&#39;</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por extensionalidad, alcanza ver que ∀xs::[a]. ∀ys::[b]</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">-- P(xs): zip xs ys = zip&#39; xs ys</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por inducción en xs.</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co">-- caso base xs = []</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>          <span class="fu">zip</span> [] ys</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>{<span class="dt">Z0</span>}    <span class="ot">=</span> <span class="fu">foldr</span> (\x rec ys <span class="ot">-&gt;</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>                   <span class="kw">if</span> <span class="fu">null</span> ys</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>                     <span class="kw">then</span> []</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>                     <span class="kw">else</span> (x, <span class="fu">head</span> ys) <span class="op">:</span> rec (<span class="fu">tail</span> ys))</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>                   (<span class="fu">const</span> []) [] ys </span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>{<span class="dt">F0</span>}    <span class="ot">=</span> (<span class="fu">const</span> []) ys</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>{<span class="fu">const</span>} <span class="ot">=</span> []</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>{<span class="dt">Z&#39;0</span>}   <span class="ot">=</span> zip&#39; [] ys</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="co">-- paso inductivo, asumo P(xs), vemos P(z:xs)</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="co">-- defino </span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> (\x rec ys <span class="ot">-&gt;</span> <span class="kw">if</span> <span class="fu">null</span> ys <span class="kw">then</span> [] <span class="kw">else</span> (x, <span class="fu">head</span> ys) <span class="op">:</span> rec (<span class="fu">tail</span> ys))</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>g z <span class="ot">=</span> (rec ys <span class="ot">-&gt;</span> <span class="kw">if</span> <span class="fu">null</span> ys <span class="kw">then</span> [] <span class="kw">else</span> (z, <span class="fu">head</span> ys) <span class="op">:</span> rec (<span class="fu">tail</span> ys)) <span class="ot">&lt;-</span>β</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>       <span class="fu">zip</span> (z<span class="op">:</span>xs) ys</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>{<span class="dt">Z0</span>} <span class="ot">=</span> <span class="fu">foldr</span> g (<span class="fu">const</span> []) (z<span class="op">:</span>xs) ys</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>{<span class="dt">F1</span>} <span class="ot">=</span> g z (<span class="fu">foldr</span> g (<span class="fu">const</span> []) xs) ys</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>β    <span class="ot">=</span> <span class="kw">if</span> <span class="fu">null</span> ys <span class="kw">then</span> [] <span class="kw">else</span> (z, <span class="fu">head</span> ys) <span class="op">:</span> (<span class="fu">foldr</span> g (<span class="fu">const</span> []) xs) (<span class="fu">tail</span> ys)</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>{<span class="dt">Z0</span>} <span class="ot">=</span> <span class="kw">if</span> <span class="fu">null</span> ys <span class="kw">then</span> [] <span class="kw">else</span> (z, <span class="fu">head</span> ys) <span class="op">:</span> <span class="fu">zip</span> xs (<span class="fu">tail</span> ys)</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>        zip&#39; (z<span class="op">:</span>xs) ys</span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>{<span class="dt">Z&#39;1</span>} <span class="ot">=</span> <span class="kw">if</span> <span class="fu">null</span> ys <span class="kw">then</span> [] <span class="kw">else</span> (z, <span class="fu">head</span> ys) <span class="op">:</span> zip&#39; xs (<span class="fu">tail</span> ys)</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>}  <span class="ot">=</span> <span class="kw">if</span> <span class="fu">null</span> ys <span class="kw">then</span> [] <span class="kw">else</span> (z, <span class="fu">head</span> ys) <span class="op">:</span> <span class="fu">zip</span> xs (<span class="fu">tail</span> ys)</span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a><span class="co">-- habría que ver caso [] y caso diferente de [], ya que tail se indefine si [], pero es medio trivial</span></span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>QED</p>
+<hr />
+<h2>6</h2>
+<p>Dadas las siguientes funciones:</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode hs"><code class="sourceCode haskell"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ot">nub ::</span> <span class="dt">Eq</span> a <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a]</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>{<span class="dt">N0</span>} nub [] <span class="ot">=</span> []</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>{<span class="dt">N1</span>} nub (x<span class="op">:</span>xs) <span class="ot">=</span> x <span class="op">:</span> <span class="fu">filter</span> (\y <span class="ot">-&gt;</span> x <span class="op">/=</span> y) (nub xs)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="ot">     union ::</span> <span class="dt">Eq</span> a <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>{<span class="dt">U0</span>} union xs ys <span class="ot">=</span> nub (xs<span class="op">++</span>ys)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="ot">     intersect ::</span> <span class="dt">Eq</span> a <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>{<span class="dt">I0</span>} intersect xs ys <span class="ot">=</span> <span class="fu">filter</span> (\e <span class="ot">-&gt;</span> <span class="fu">elem</span> e ys) xs</span></code></pre></div>
+<p>Indicar si las siguientes propiedades son verdaderas o falsas. Si son
+verdaderas, realizar una demostración. Si son falsas, presentar un
+contraejemplo.</p>
+<h2>I, II, III no me parecieron interesantes de hacer.</h2>
+<h2>IV. </h2>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode hs"><code class="sourceCode haskell"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Eq</span> a <span class="ot">=&gt;</span> ∀<span class="ot"> xs::</span>[a] <span class="op">.</span> ∀<span class="ot"> ys::</span>[a] <span class="op">.</span> ∀<span class="ot"> e::</span>a <span class="op">.</span> <span class="dt">P</span>(xs)<span class="op">:</span> <span class="fu">elem</span> e (intersect xs ys) <span class="ot">=</span> (<span class="fu">elem</span> e xs) <span class="op">&amp;&amp;</span> (<span class="fu">elem</span> e ys)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- por inducción en xs </span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- caso base</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="dt">P</span>([])<span class="op">:</span> <span class="fu">elem</span> e (intersect [] ys) <span class="ot">=</span> (<span class="fu">elem</span> e []) <span class="op">&amp;&amp;</span> (<span class="fu">elem</span> e ys)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- demo </span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>           <span class="fu">elem</span> e (intersect [] ys)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>{<span class="dt">I0</span>}     <span class="ot">=</span> <span class="fu">elem</span> e (<span class="fu">filter</span> (\e <span class="ot">-&gt;</span> <span class="fu">elem</span> e ys)) []</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>{<span class="fu">filter</span>} <span class="ot">=</span> <span class="fu">elem</span> e []</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>{<span class="fu">elem</span>}   <span class="ot">=</span> <span class="dt">False</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>         (<span class="fu">elem</span> e []) <span class="op">&amp;&amp;</span> (<span class="fu">elem</span> e ys)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>{<span class="fu">elem</span>} <span class="ot">=</span> <span class="dt">False</span> <span class="op">&amp;&amp;</span> (<span class="fu">elem</span> e ys)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>{<span class="dt">BOOL</span>} <span class="ot">=</span> <span class="dt">False</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="co">-- paso inductivo, asumo P(xs)</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a><span class="dt">P</span>(x<span class="op">:</span>xs)<span class="op">:</span> <span class="fu">elem</span> e (intersect (x<span class="op">:</span>xs) ys) <span class="ot">=</span> (<span class="fu">elem</span> e (x<span class="op">:</span>xs)) <span class="op">&amp;&amp;</span> (<span class="fu">elem</span> e ys)</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="co">--izq</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>         (<span class="fu">elem</span> e (x<span class="op">:</span>xs)) <span class="op">&amp;&amp;</span> (<span class="fu">elem</span> e ys)</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>{<span class="fu">elem</span>} <span class="ot">=</span> ((e<span class="op">==</span>x) <span class="op">|</span> <span class="fu">elem</span> e xs) <span class="op">&amp;&amp;</span> <span class="fu">elem</span> e ys</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="co">-- caso (e==x) = False</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>         (<span class="dt">False</span> <span class="op">|</span> <span class="fu">elem</span> e xs) <span class="op">&amp;&amp;</span> <span class="fu">elem</span> e ys</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>{<span class="dt">BOOL</span>} <span class="ot">=</span> <span class="fu">elem</span> e xs <span class="op">&amp;&amp;</span> <span class="fu">elem</span> e ys</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>}   <span class="ot">=</span> <span class="fu">elem</span> e (intersect xs ys)</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a><span class="co">--der</span></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>           <span class="fu">elem</span> e (intersect (x<span class="op">:</span>xs) ys)</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>{<span class="dt">I0</span>}     <span class="ot">=</span> <span class="fu">elem</span> e (<span class="fu">filter</span> (\e <span class="ot">-&gt;</span> <span class="fu">elem</span> e ys) (x<span class="op">:</span>xs))</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>{<span class="fu">filter</span>} <span class="ot">=</span> <span class="fu">elem</span> e (<span class="fu">filter</span> (\e <span class="ot">-&gt;</span> <span class="fu">elem</span> e ys) (xs)) <span class="co">--es caso (e/=x)</span></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>{<span class="dt">I0</span>}     <span class="ot">=</span> <span class="fu">elem</span> e (intersect xs ys)</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a><span class="co">-- caso (elem e xs) = False, (e==x) = True</span></span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a><span class="co">--izq</span></span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>         (<span class="dt">True</span> <span class="op">|</span> <span class="dt">False</span>) <span class="op">&amp;&amp;</span> <span class="fu">elem</span> e ys </span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>{<span class="dt">BOOL</span>} <span class="ot">=</span> <span class="dt">True</span> <span class="op">&amp;&amp;</span> <span class="fu">elem</span> e ys</span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>{<span class="dt">BOOL</span>} <span class="ot">=</span> <span class="fu">elem</span> e ys</span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>}   <span class="ot">=</span> <span class="dt">True</span></span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a><span class="co">--der </span></span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>         <span class="fu">elem</span> e (intersect (x<span class="op">:</span>xs) ys)</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>{<span class="dt">I0</span>}   <span class="ot">=</span> <span class="fu">elem</span> e (<span class="fu">filter</span> (\e <span class="ot">-&gt;</span> <span class="fu">elem</span> e ys) (x<span class="op">:</span>xs))</span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a><span class="co">{--}</span>   <span class="ot">=</span> <span class="fu">elem</span> e (x<span class="op">:</span><span class="fu">filter</span> (\e <span class="ot">-&gt;</span> <span class="fu">elem</span> e ys) xs)</span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>{<span class="fu">elem</span>} <span class="ot">=</span> <span class="dt">True</span> <span class="co">-- es (e==x)</span></span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>QED</p>
+<h2>V. </h2>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode hs"><code class="sourceCode haskell"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Eq</span> a <span class="ot">=&gt;</span> ∀<span class="ot"> xs::</span>[a] <span class="op">.</span> ∀<span class="ot"> ys::</span>[a] <span class="op">.</span> <span class="fu">length</span> (union xs ys) <span class="ot">=</span> <span class="fu">length</span> xs <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- contraejemplo</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span> (union [<span class="dv">1</span>] [<span class="dv">1</span>]) <span class="op">=?</span> <span class="fu">length</span> [<span class="dv">1</span>] <span class="op">+</span> <span class="fu">length</span> [<span class="dv">1</span>]</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">--izq</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>           <span class="fu">length</span> (union [<span class="dv">1</span>] [<span class="dv">1</span>])</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>{<span class="dt">U0</span>}     <span class="ot">=</span> <span class="fu">length</span> nub ([<span class="dv">1</span>]<span class="op">++</span>[<span class="dv">1</span>])</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">1</span>}    <span class="ot">=</span> <span class="fu">length</span> nub (<span class="dv">1</span><span class="op">:</span><span class="dv">1</span><span class="op">:</span>[])</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>{<span class="dt">N1</span>}     <span class="ot">=</span> <span class="fu">length</span> <span class="dv">1</span> <span class="op">:</span> <span class="fu">filter</span> (\y <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">/=</span> y) (nub [<span class="dv">1</span>])</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>{<span class="dt">N1</span>}     <span class="ot">=</span> <span class="fu">length</span> <span class="dv">1</span> <span class="op">:</span> <span class="fu">filter</span> (\y <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">/=</span> y) (<span class="fu">filter</span> (\y <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">/=</span> y) (nub []))</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>{<span class="dt">N0</span>}     <span class="ot">=</span> <span class="fu">length</span> <span class="dv">1</span> <span class="op">:</span> <span class="fu">filter</span> (\y <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">/=</span> y) (<span class="fu">filter</span> (\y <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">/=</span> y) [])</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>β        <span class="ot">=</span> <span class="fu">length</span> <span class="dv">1</span> <span class="op">:</span> <span class="fu">filter</span> (\y <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">/=</span> y) (<span class="fu">filter</span> (<span class="dv">1</span> <span class="op">/=</span> []))</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>{<span class="fu">filter</span>} <span class="ot">=</span> <span class="fu">length</span> <span class="dv">1</span> <span class="op">:</span> <span class="fu">filter</span> (\y <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">/=</span> y) [<span class="dv">1</span>]</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>β        <span class="ot">=</span> <span class="fu">length</span> <span class="dv">1</span> <span class="op">:</span> <span class="fu">filter</span> (<span class="dv">1</span> <span class="op">/=</span> <span class="dv">1</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>{<span class="fu">filter</span>} <span class="ot">=</span> <span class="fu">length</span> <span class="dv">1</span><span class="op">:</span>[]</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>{<span class="dt">L0</span>}     <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="co">--der </span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>          <span class="fu">length</span> [<span class="dv">1</span>] <span class="op">+</span> <span class="fu">length</span> [<span class="dv">1</span>]</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>{<span class="dv">2</span><span class="op">*</span><span class="dt">L1</span>}  <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> [] <span class="op">+</span> <span class="fu">length</span> []</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>{<span class="dv">2</span><span class="op">*</span><span class="dt">L0</span>}  <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span> <span class="op">+</span> <span class="dv">0</span> <span class="op">+</span> <span class="dv">0</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>{<span class="dv">4</span><span class="op">*</span><span class="dt">INT</span>} <span class="ot">=</span> <span class="dv">2</span> </span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="co">-- luego</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="op">==</span> <span class="dv">2</span>) <span class="ot">=</span> <span class="dt">False</span></span></code></pre></div>
+<h2>VI.</h2>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode hs"><code class="sourceCode haskell"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Eq</span> a <span class="ot">=&gt;</span> ∀<span class="ot"> xs::</span>[a] <span class="op">.</span> ∀<span class="ot"> ys::</span>[a] <span class="op">.</span> <span class="dt">P</span>(xs)<span class="op">:</span> <span class="fu">length</span> (union xs ys) ≤ <span class="fu">length</span> xs <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">--Por inducción en xs </span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">--Caso base</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="dt">P</span>([])<span class="op">:</span> <span class="fu">length</span> (union [] ys) ≤ <span class="fu">length</span> [] <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">length</span> (union [] ys)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>{<span class="dt">U0</span>}  <span class="ot">=</span> <span class="fu">length</span> (nub []<span class="op">++</span>ys)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">0</span>} <span class="ot">=</span> <span class="fu">length</span> (nub ys)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">length</span> [] <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>{<span class="dt">L0</span>}  <span class="ot">=</span> <span class="dv">0</span> <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>{<span class="dt">INT</span>} <span class="ot">=</span> <span class="fu">length</span> ys</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="co">-- nub ys ≤ ys, ∀ys::[a]</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso inductivo, asumo P(xs) </span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="dt">P</span>(x<span class="op">:</span>xs)<span class="op">:</span> <span class="fu">length</span> (union (x<span class="op">:</span>xs) ys) ≤ <span class="fu">length</span> (x<span class="op">:</span>xs) <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">length</span> (union (x<span class="op">:</span>xs) ys)</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>{<span class="dt">U0</span>}  <span class="ot">=</span> <span class="fu">length</span> (nub (x<span class="op">:</span>xs)<span class="op">++</span>ys)</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>{<span class="op">++</span><span class="dv">1</span>} <span class="ot">=</span> <span class="fu">length</span> (nub x<span class="op">:</span>(xs<span class="op">++</span>ys))</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>{<span class="dt">N1</span>}  <span class="ot">=</span> <span class="fu">length</span> (x<span class="op">:</span> <span class="fu">filter</span> (\y <span class="ot">-&gt;</span> x <span class="op">/=</span> y) (nub xs<span class="op">++</span>ys))</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>β     <span class="ot">=</span> <span class="fu">length</span> (x<span class="op">:</span> <span class="fu">filter</span> x <span class="op">/=</span> (nub xs<span class="op">++</span>ys))</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>{<span class="dt">L1</span>}  <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> (<span class="fu">filter</span> x <span class="op">/=</span> (nub xs<span class="op">++</span>ys))</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="co">--der </span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span> (x<span class="op">:</span>xs) <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>{<span class="dt">L1</span>} <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> xs <span class="op">+</span> <span class="fu">length</span> ys</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>{<span class="dt">HI</span>} <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> (union xs ys)</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>{<span class="dt">U0</span>} <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span> (nub xs<span class="op">++</span>ys)</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a><span class="co">-- sabemos que por ∀p::(a-&gt;Bool). length (filter p xs) ≤ length xs,</span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span> (<span class="fu">filter</span> x <span class="op">/=</span> (nub xs<span class="op">++</span>ys)) ≤ <span class="fu">length</span> (<span class="fu">filter</span> x <span class="op">/=</span> (nub xs<span class="op">++</span>ys)) <span class="ot">=</span> <span class="dt">True</span></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>QED</p>
+<hr />
+<h2>IX </h2>
+<p>Dadas las funciones altura y cantNodos definidas en la práctica 1
+para árboles binarios, demostrar la siguiente propiedad:</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode hs"><code class="sourceCode haskell"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">--definiciones</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">AB</span> a <span class="ot">=</span> <span class="dt">Nil</span> <span class="op">|</span> <span class="dt">Bin</span> (<span class="dt">AB</span> a) a (<span class="dt">AB</span> a)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="ot">       foldAB ::</span> (b <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> <span class="dt">AB</span> a <span class="ot">-&gt;</span> b</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FAB0</span>} foldAB _ z <span class="dt">Nil</span> <span class="ot">=</span> z</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FAB1</span>} foldAB f z (<span class="dt">Bin</span> i c r) <span class="ot">=</span> f (foldAB f z i) c (foldAB f z r)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="ot">     altura ::</span> <span class="dt">AB</span> a <span class="ot">-&gt;</span> <span class="dt">Integer</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>{<span class="dt">AL</span>} altura <span class="ot">=</span> foldAB (\i _ r <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">max</span> i r) <span class="dv">0</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="ot">     cantNodos ::</span> <span class="dt">AB</span> a <span class="ot">-&gt;</span> <span class="dt">Integer</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>{<span class="dt">CA</span>} cantNodos <span class="ot">=</span> foldAB (\i _ r <span class="ot">-&gt;</span> i<span class="op">+</span><span class="dv">1</span><span class="op">+</span>r) <span class="dv">0</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co">-- queremos probar que</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>∀<span class="ot"> x::</span><span class="dt">AB</span> a <span class="op">.</span> <span class="dt">P</span>(x)<span class="op">:</span> altura x ≤ cantNodos x</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por inducción en x</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="co">-- Caso base P(Nil)</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="co">--qvq altura Nil ≤ cantNodos Nil</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>        altura <span class="dt">Nil</span> </span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>{<span class="dt">AL</span>}  <span class="ot">=</span> foldAB (\i _ r <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">max</span> i r) <span class="dv">0</span> <span class="dt">Nil</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FAB</span>} <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>        cantNodos <span class="dt">Nil</span> </span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>{<span class="dt">CA</span>}  <span class="ot">=</span> foldAB (\i _ r <span class="ot">-&gt;</span> i<span class="op">+</span><span class="dv">1</span><span class="op">+</span>r) <span class="dv">0</span> <span class="dt">Nil</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FAB</span>} <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a><span class="co">--Caso recursivo P(i c r)</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a><span class="co">-- queremos probar que</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>foldAB (\i _ r <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">max</span> i r) <span class="dv">0</span> (i c r)</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>≤</span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>foldAB (\i _ r <span class="ot">-&gt;</span> i<span class="op">+</span><span class="dv">1</span><span class="op">+</span>r) <span class="dv">0</span> (i c r)</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a><span class="co">-- demostración</span></span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>f <span class="ot">=</span> (\i _ r <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">max</span> i r)</span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> (\i _ r <span class="ot">-&gt;</span> i <span class="op">+</span> <span class="dv">1</span> <span class="op">+</span> r)</span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a><span class="co">--izq </span></span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>         foldAB f <span class="dv">0</span> (<span class="dt">Bin</span> i c r)</span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FAB1</span>} <span class="ot">=</span> f (foldAB f <span class="dv">0</span> i) c (foldAB f <span class="dv">0</span> r)</span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>{f}    <span class="ot">=</span> (\i _ r <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">max</span> i r) (foldAB f <span class="dv">0</span> i) c (foldAB f <span class="dv">0</span> r)</span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>β      <span class="ot">=</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fu">max</span> (foldAB f <span class="dv">0</span> i) (foldAB f <span class="dv">0</span> r))</span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a><span class="co">--der </span></span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>         foldAB (\i _ r <span class="ot">-&gt;</span> i<span class="op">+</span><span class="dv">1</span><span class="op">+</span>r) <span class="dv">0</span> (i c r)</span>
+<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a>{<span class="dt">FAB1</span>} <span class="ot">=</span> g (foldAB g <span class="dv">0</span> i) c (foldAB g <span class="dv">0</span> r)</span>
+<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a>{g}    <span class="ot">=</span> (\i _ r <span class="ot">-&gt;</span> i <span class="op">+</span> <span class="dv">1</span> <span class="op">+</span> r) (foldAB g <span class="dv">0</span> i) c (foldAB g <span class="dv">0</span> r)</span>
+<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a>β      <span class="ot">=</span> (foldAB g <span class="dv">0</span> i) <span class="op">+</span> <span class="dv">1</span> <span class="op">+</span> (foldAB g <span class="dv">0</span> i)</span>
+<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a>{<span class="dt">INT</span>}  <span class="ot">=</span> <span class="dv">1</span> <span class="op">+</span> (foldAB g <span class="dv">0</span> i) <span class="op">+</span> (foldAB g <span class="dv">0</span> r)</span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a><span class="co">-- vemos que </span></span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a>      (<span class="dv">1</span> <span class="op">+</span> <span class="fu">max</span> (foldAB f <span class="dv">0</span> i) (foldAB f <span class="dv">0</span> r)) ≤ (<span class="dv">1</span> <span class="op">+</span> (foldAB g <span class="dv">0</span> i) <span class="op">+</span> (foldAB g <span class="dv">0</span> r))</span>
+<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a>     ⇔</span>
+<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a>       <span class="fu">max</span> (foldAB f <span class="dv">0</span> i) (foldAB f <span class="dv">0</span> r) ≤ (foldAB g <span class="dv">0</span> i) <span class="op">+</span> (foldAB g <span class="dv">0</span> r)</span>
+<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a>{f}  <span class="ot">=</span> <span class="fu">max</span> (altura i) (altura r) ≤ (cantNodos i) <span class="op">+</span> (cantNodos r)</span>
+<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a><span class="co">-- Por HI:</span></span>
+<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a>(altura i) ≤ (cantNodos i)</span>
+<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a>(altura r) ≤ (cantNodos r)</span>
+<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a><span class="ot">=&gt;</span></span>
+<span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span> (altura i) (altura r) ≤ (cantNodos i) ≤ (cantNodos i) <span class="op">+</span> (cantNodos r)</span>
+<span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a><span class="co">-- OR</span></span>
+<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span> (altura i) (altura r) ≤ (cantNodos r) ≤ (cantNodos i) <span class="op">+</span> (cantNodos r)</span>
+<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>QED</p>
+<hr />
+</body>
+</html>
