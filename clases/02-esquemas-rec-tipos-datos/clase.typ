@@ -47,7 +47,9 @@ foldr f z (x:xs) = f x : (foldr f z xs)
 == Recursión primitiva
 
 Sea g :: [a] -> b tal que:
+
 g [] = < caso base >
+
 g (x:xs) = < caso recursivo >
 
 
