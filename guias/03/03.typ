@@ -188,6 +188,7 @@ $(rho => sigma => tau) => ((rho and sigma) => tau)$
 #line(length: 100%)
 
 == VII. de Morgan (I)
+= #text(red)[*Preguntar*]
 
 Queremos probar $not (rho or sigma) <=> (not rho and not sigma)$:
 
@@ -233,21 +234,163 @@ $(<==)$
 == VIII. de Morgan (II)
 
 
+
 #line(length: 100%)
 
 == IX. Conmutatividad ($and$)
 
+#align(center)[
+  #prooftree(
+    impl-i($tack (rho and sigma) => (sigma and rho)$,
+      and-i($rho and sigma tack sigma and rho$,
+        and-e1($rho and sigma tack rho$,
+          ax($rho and sigma tack rho and sigma$)
+        ),
+        and-e2($rho and sigma tack sigma$,
+          ax($rho and sigma tack rho and sigma$)
+        )
+      )
+    )
+  )
+]
 
 #line(length: 100%)
 
 == X. Asociatividad ($and$)
+
+$((rho and sigma) and tau) <=> (rho and (sigma and tau))$
+
+$(==>)$
+
+#align(center)[
+  #prooftree(
+    impl-i($tack((rho and sigma) and tau) => (rho and (sigma and tau))$,
+      and-i($Gamma = ((rho and sigma) and tau) tack (rho and (sigma and tau))$,
+        and-e1($Gamma tack rho$,
+          and-e1($Gamma tack rho and sigma$,
+            ax($Gamma tack (rho and sigma) and tau$)
+          )
+        ), 
+        and-i($Gamma tack sigma and tau$,
+          and-e2($Gamma tack sigma$,
+            and-e1($Gamma tack rho and sigma$,
+              ax($Gamma tack (rho and sigma) and tau$)
+            )
+          ),
+          and-e2($Gamma tack tau$,
+            ax($Gamma tack (rho and sigma) and tau$)
+          )
+        )
+      )
+    )
+  )
+]
+
+$(<==)$
+
+#align(center)[
+  #prooftree(
+    impl-i($tack (rho and (sigma and tau)) => ((rho and sigma) and tau)$,
+      and-i($Gamma = (rho and (sigma and tau)) tack ((rho and sigma) and tau)$,
+        and-i($Gamma tack rho and sigma$,
+          and-e1($Gamma tack rho$,
+            ax($Gamma tack rho and (sigma and tau)$)
+          ),
+          and-e1($Gamma tack sigma$,
+            and-e2($Gamma tack sigma and tau$,
+              ax($Gamma tack rho and (sigma and tau)$)
+            )
+          )
+        ), 
+        and-e2($Gamma tack tau$,
+          and-e2($Gamma tack sigma and tau$,
+            ax($Gamma tack rho and (sigma and tau)$)
+          ),
+        )
+      )
+    )
+  )
+]
 
 
 #line(length: 100%)
 
 == XI. Conmutatividad ($or$)
 
+#align(center)[
+  #prooftree(
+    impl-i($tack (rho or sigma) => (sigma or rho)$,
+      or-e($(rho or sigma) tack sigma or rho$,
+          ax($(rho or sigma) tack rho or sigma $),
+          or-i2($(rho or sigma), rho tack sigma or rho$,
+            ax($(rho or sigma), rho tack rho$)
+          ),
+          or-i1($(rho or sigma), sigma tack sigma or rho$,
+            ax($(rho or sigma), sigma tack sigma$)
+          ),
+        )
+      )
+)
+]
+
 
 #line(length: 100%)
 
 == XII. Asociatividad ($or$)
+
+$((rho or sigma) or tau) <=> (rho or (sigma or tau))$
+
+$(==>)$
+#align(center)[
+  #prooftree(
+    impl-i($tack ((rho or sigma) or tau) => (rho or (sigma or tau))$,
+      or-e($Gamma = ((rho or sigma) or tau) tack (rho or (sigma or tau))$,
+        ax($Gamma tack (rho or sigma) or tau$),
+        or-e($Sigma = Gamma, (rho or sigma) tack rho or (sigma or tau)$,
+          ax($Sigma tack rho or sigma$),
+          or-i1($Sigma,rho tack  rho or (sigma or tau)$,
+            ax($Sigma,rho tack rho$)
+          ),
+          or-i2($Sigma,sigma tack rho or (sigma or tau)$,
+            or-i1($Sigma, sigma tack sigma or tau$,
+            ax($Sigma, sigma tack sigma$)
+            )
+          )
+        
+        ),
+        or-i2($Gamma, tau tack rho or (sigma or tau)$,
+          or-i2($Gamma, tau tack sigma or tau$,
+            ax($Gamma, tau tack tau$)
+          )
+        )
+      )
+    )
+)]
+
+
+$(<==)$
+
+#align(center)[
+  #prooftree(
+    impl-i($tack (rho or (sigma or tau)) => ((rho or sigma) or tau)$,
+      or-e($Gamma = (rho or (sigma or tau)) tack ((rho or sigma) or tau)$,
+        ax($Gamma tack rho or (sigma or tau)$),
+        or-i1($Gamma, rho tack (rho or sigma) or tau$,
+          or-i1($Gamma, rho tack rho or sigma$,
+            ax($Gamma, rho tack rho$)
+          )
+        ),
+        or-e($Sigma = Gamma, (sigma or tau) tack (rho or sigma) or tau$,
+          ax($Sigma tack sigma or tau$),
+          or-i1($Sigma, sigma tack (rho or sigma) or tau$,
+            or-i2($Sigma, sigma tack rho or sigma$,
+              ax($Sigma, sigma tack sigma$)
+            )
+          ),
+          or-i2($Sigma, tau tack (rho or sigma) or tau$,
+            ax($Sigma, tau tack tau$)
+          )
+        )
+      )
+    ),
+)]
