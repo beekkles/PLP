@@ -5,6 +5,8 @@
 // intuicionista
 #let and-e1 = rule.with(name: $and_e_1$)
 #let and-e2 = rule.with(name: $and_e_2$)
+#let and-i = rule.with(name: $and_i$)
+
 
 #let impl-i = rule.with(name: $scripts(=>)_i$)
 #let impl-e = rule.with(name: $scripts(=>)_e$)
@@ -97,9 +99,11 @@ Demostrar en deducción natural que las siguientes fórmulas son teoremas sin us
 #prooftree(
   impl-i($tack not not not rho => not rho$,
     not-i($not not not rho tack not rho$,
-      not-e($Gamma = not not not rho, not not rho tack tack.t$,
-        rule($Gamma tack not not rho$),
-        rule($Gamma tack not not not rho$)
+      not-e($Gamma = not not not rho,rho tack tack.t$,
+                    notnot-i($Gamma tack not not rho$,
+                      ax($Gamma tack rho$)
+                    ),
+                    ax($Gamma tack not not not rho$),
       )
     )
   )
@@ -109,16 +113,120 @@ Demostrar en deducción natural que las siguientes fórmulas son teoremas sin us
 
 == V. Contraposición
 
+#align(center)[
+#prooftree(
+  impl-i($tack (rho => sigma) => (not sigma => not rho)$,
+    impl-i($rho => sigma tack not sigma => not rho$,
+      not-i($(rho => sigma), not sigma tack not rho$,
+        not-e($Gamma = (rho => sigma), not sigma, rho tack tack.t$,
+            impl-e($Gamma tack sigma$,
+              ax($Gamma tack rho => sigma$),ax($Gamma tack rho$)
+          ),
+          ax($Gamma tack not sigma$)
+        )
+      )
+    )
+  )
+)]
+
+
 
 #line(length: 100%)
 
 == VI. Adjunción
 
+Probar $((rho and sigma) => tau) <=> (rho => sigma => tau)$
+se reduce a probar
+
+$((rho and sigma) => tau) => (rho => sigma => tau)$
+y
+$(rho => sigma => tau) => ((rho and sigma) => tau)$
+
+*Caso 1*
+
+#align(center)[
+#prooftree(
+  impl-i($tack ((rho and sigma) => tau) => (rho => sigma => tau)$,
+    impl-i($((rho and sigma) => tau) tack rho => (sigma => tau)$,
+      impl-i($((rho and sigma) => tau), rho tack (sigma => tau)$,
+        impl-e($Gamma =(rho and sigma) => tau, rho, sigma tack tau$,
+          ax($Gamma tack (rho and sigma)=> tau$),
+          and-i($Gamma tack (rho and sigma) $,
+            ax($Gamma tack rho $),
+            ax($Gamma tack sigma $)
+
+          )
+        )
+      )
+    )
+)
+
+)]
+
+*Caso 2*
+
+#align(center)[
+#prooftree(
+  impl-i($tack (rho => sigma => tau) => ((rho and sigma) => tau)$,
+    impl-i($(rho => sigma => tau) tack ((rho and sigma) => tau)$,
+      impl-e($Gamma = (rho => sigma => tau),(rho and sigma) tack tau$,
+        impl-e($Gamma tack sigma => tau $,
+          ax($Gamma tack rho => sigma => tau$),
+          and-e1($Gamma tack rho$,
+            ax($Gamma tack rho and sigma$)
+          )
+        ),
+        and-e2($Gamma tack sigma$,
+          ax($Gamma tack rho and sigma$)
+        )
+      )
+    )
+)
+
+)]
 
 #line(length: 100%)
 
 == VII. de Morgan (I)
 
+Queremos probar $not (rho or sigma) <=> (not rho and not sigma)$:
+
+$(==>)$
+
+#align(center)[
+#prooftree(
+  impl-i($tack not (rho or sigma) => (not rho and not sigma)$,
+    and-i($Gamma =not (rho or sigma) tack (not rho and not sigma)$,
+      not-i($Gamma tack not rho$,
+        not-e($Gamma, rho tack tack.t$,
+          ax($Gamma, rho tack rho$),
+          or-e($Gamma, rho tack not rho$,
+            or-i1($Gamma, rho tack (rho or sigma)$,
+              ax($Gamma, rho tack rho$)
+            ),
+            ax($Gamma, rho tack rho$),
+            ax($Gamma, rho, sigma tack rho$)
+          )
+        )
+      ),
+      
+      not-i($Gamma tack not sigma$,
+        not-e($Gamma, sigma tack tack.t$,
+        rule($Gamma, sigma tack tau$),
+          rule($Gamma, sigma tack not tau$)
+        )
+        )
+      )
+    )
+)]
+
+$(<==)$
+
+
+#align(center)[
+#prooftree(
+  rule($tack (not rho and not sigma) => not (rho or sigma)$)
+)]
 
 #line(length: 100%)
 
