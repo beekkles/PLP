@@ -16,4 +16,9 @@ agregar :: Eq a => a -> Conj a -> Conj a
 agregar e c = \x -> x == e || c x
 
 union :: Conj a -> Conj a -> Conj a
-union c c' =\x -> c x && c' x
+union c c' =\x ->
+    
+    
+    
+    
+     c x && c' x
