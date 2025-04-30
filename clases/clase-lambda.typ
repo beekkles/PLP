@@ -311,9 +311,6 @@ No podemos $nu$ pq' $M_1$ no es un valor
   )
 )
 
-
-
-
 == d.
 
 $"izZero"(succ("pred"(succ("Zero")))) --> "E-isZero E-PredSucc E-Succ"$
@@ -322,3 +319,13 @@ $"izZero"(succ("Zero")) --> ("E-isZero"_n)$
 
 false 
 
+#line(length: 100%)
+
+#text(red)[*NO VALE DERIVAR MAS DE UN PASO A LA VEZ*]
+
+V::= true | false | zero | succ(V) | $lambda x: sigma$ 
+
+$lambda x: Bool . "if true then x else false" -->\
+lambda x: Bool . x
+
+$
