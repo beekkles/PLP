@@ -323,7 +323,7 @@ false
 
 #text(red)[*NO VALE DERIVAR MAS DE UN PASO A LA VEZ*]
 
-V::= true | false | zero | succ(V) | $lambda x: sigma$ 
+V::= true | false | zero | succ(V) | $lambda x: sigma. "F"$ 
 
 $lambda x: Bool . "if true then x else false" -->\
 lambda x: Bool . x
