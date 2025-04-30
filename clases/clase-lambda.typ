@@ -1,4 +1,5 @@
 #import "@preview/curryst:0.5.1": rule, prooftree
+#import "@preview/lambdabus:0.1.0" as lmd
 
 #let t-true = rule.with(name: [T-True])
 
@@ -212,4 +213,112 @@ $tack lambda x : sigma. mu(lambda x : sigma . M) : sigma -> tau$
 
 
 = Semántica operacional.
+
+$lambda x : Bool. (lambda y. Bool. x) "false"$ *es un valor*
+
+$(lambda y. Bool. x)->M:: (lambda x: sigma . M )$
+#line()
+
+$((lambda x : Bool . lambda y: Bool. "if" x "then true else" y) "false") "true" --> beta, mu$
+
+$(lambda y. Bool. "if false then true else y") "true"$
+
+$-->_beta "if false then true else true" ->_"E-IfFalse" "true"$
+
+#line()
+
+$
+&(lambda x : Bool. lambda y: Bool -> Bool. y (y x)) ((lambda z : Bool. "true") "false")(lambda w: Bool. w) &-->_(mu,nu,beta) \
+
+
+&(lambda x: Bool . lambda y : Bool -> Bool . y (y x)) "true" (lambda w : Bool . w) &-->_(mu, beta) \
+
+&(lambda y: Bool -> Bool . y (y "true")) (lambda w: Bool. w) &-->_(mu,beta) \
+
+&(lambda y. Bool -> Bool. y (y "true")) (lambda w. Bool. w) &-->_beta \
+
+&(lambda w: Bool. w) ((lambda w: Bool. w) "true") &-->_(nu, beta) \
+
+&(lambda w: Bool. w) "true" &-->_(beta) \
+
+&"true"$
+
+
+#line()
+
+*Casos base*
+
+E-IfTrue/False
+
+$beta$
+
+*Casos recursivos*
+
+E-if
+
+$mu$
+
+$nu$
+
+
+*Caso base 1:*
+
+M reduce con E-IfTrue 
+
+M:= if true then $M_1$ else $M_2$ $--> "E-IfTrue"$ $M_1$
+
+sup que $M' "/" M->M', M' != M_1$
+
+*No puede pasar* E-If porque la guarda es un valor, no $beta,mu,nu$ porque no es una aplicación.
+
+
+
+*Caso rec 1*
+
+M reduce con $mu$ M:= $M_1 M_2$
+
+*HI*: si $M_1 -> M_1 ' and M_1 -> M_1 '', M_1 ' = M_1 ''$
+
+Sea N tal que $M_1 -> N M_2$
+
+No podemos aplicar E-If pq' no es apl.
+
+No podemos $beta$ pq' $M_1$ no es un valor
+
+No podemos $nu$ pq' $M_1$ no es un valor
+
+¿$M_1 -> N' "/" N!=N'$?
+
+*NO* pq', por HI, si $M_1 -> M_1 ' and M_1 -> M_1 '', M_1 ' = M_1 ''$
+
+
+= Extensión con numeros naturales.
+
+#let Nat = "Nat"
+#let succ = "succ"
+#let zero = "zero"
+
+== a.
+
+#prooftree(
+  t-app($tack (lambda x : Nat succ(x) zero : Nat)$,
+    t-abs($tack (lambda x: Nat. succ(x))$,
+      t-succ($x: Nat tack succ(x). Nat$,
+        t-var($x: Nat tack x.Nat$)
+      )
+    ),
+    t-zero($tack zero: N$)
+  )
+)
+
+
+
+
+== d.
+
+$"izZero"(succ("pred"(succ("Zero")))) --> "E-isZero E-PredSucc E-Succ"$
+
+$"izZero"(succ("Zero")) --> ("E-isZero"_n)$
+
+false 
 
