@@ -57,13 +57,19 @@ insertarOrdenado e = recr (\x xs acc -> if x <= e && e <= head xs then x:e:xs el
 
 --7--------------------------------------------------------------------------------
 
-mapPares :: ((a,b) -> c) -> [(a,b)] -> [c]
-mapPares f = foldr (\(x,y) acc -> f (x,y) : acc) []
+mapPares :: (a -> b -> c) -> [(a,b)] -> [c]
+mapPares f = foldr (\(x,y) acc -> f x y : acc) []
 
 armarPares :: [a] -> [b] -> [(a,b)]
 armarPares [] _           = []
 armarPares _ []           = []
 armarPares (x:xs) (y:ys)  = (x,y): armarPares xs ys
+
+-- con foldr
+
+armarPares' :: [a] -> [b] -> [(a,b)]
+armarPares' = foldr (\x acc (y:ys) -> (x,y):acc ys) (const [])
+--
 
 mapDoble :: (a -> b -> c) -> [a] -> [b] -> [c]
 mapDoble _ [] _           = []
@@ -73,7 +79,7 @@ mapDoble f (x:xs) (y:ys)  = f x y : mapDoble f xs ys
 --9--------------------------------------------------------------------------------
 data Nat = Cero | Succ Nat
   deriving Show
-
+{-
 foldNat :: (b -> b) -> b -> Nat -> b
 foldNat _ z Cero     = z
 foldNat f z (Succ a) = f (foldNat f z a)
@@ -88,11 +94,20 @@ mulNat a = foldNat (sumNat a) Cero
 
 potNat :: Nat -> Nat -> Nat
 potNat p = foldNat (mulNat p) (Succ Cero)
+-}
 
+-- con Integer
+
+foldNat :: (Integer -> b -> b) -> b -> Integer -> b
+foldNat _ z 0 = z
+foldNat f z n = f n (foldNat f z (n-1))
+
+potencia :: Integer -> Integer -> Integer
+potencia b = foldNat (\_ acc -> b*acc) 1
 --10--------------------------------------------------------------------------------
 
 genLista :: a -> (a -> a) -> Integer -> [a]
-genLista start f size = foldr (\ _ g x -> x : g (f x))  (const []) [1..size] start
+genLista inicio f len = foldr (\_ g x -> x : g (f x))  (const []) [1..len] inicio
 
 --11--------------------------------------------------------------------------------
 
