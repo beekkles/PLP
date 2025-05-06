@@ -258,7 +258,23 @@ $(lambda x: Bool. x)$ es $Bool -> Bool$
 = 7
 
 #let imi2 = rule.with(name: $->_(i 2)$)
+#let imi = rule.with(name: $->_(i)$)
+
+Comparamos:
 
 #prooftree(
-    imi2($$)
+    imi2($Gamma tack lambda x: Bool -> Bool. M:Bool -> Bool -> Bool$,
+        $Gamma tack M:Bool <-"INVALIDOOOO"$ 
+    )
 )
+
+#prooftree(
+    imi($Gamma tack lambda x: Bool -> Bool. M:Bool -> Bool -> Bool$,
+        $Gamma, x:Bool -> Bool tack M:Bool$
+    )
+)
+
+#pagebreak()
+
+= 9
+
