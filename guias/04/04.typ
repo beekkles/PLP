@@ -446,6 +446,126 @@ Pero $tau != rho -> tau$, no tipa.
 
 == a.
 
+$(lambda y: sigma. x" " (lambda x:tau. x))#text(blue)[*{$x:=(lambda y:rho. x" "y)$}*]$
+
+$=_(alpha) (lambda z: sigma. x" " (lambda w:tau. w))#text(blue)[*{$x:=(lambda y:rho. x" "y)$}*]$
+
+$=^"def" (lambda z: sigma. (lambda y:rho. x" "y)" " (lambda w:tau. w))$
+
 == b.
 
+$(y" "(lambda v:sigma." "x" "v))#text(blue)[*{$x:= (lambda y: tau." "v" "y)$}*]$
+
+$=_alpha (y" "(lambda w:sigma." "x" "w))#text(blue)[*{$x:= (lambda z: tau." "v" "z)$}*]$
+
+$=^"def" (y" "(lambda w:sigma." "(lambda z: tau." "v" "z)" "w))$
+
+#pagebreak()
+
+= 15
+
+== a.
+
+$(lambda x:Bool. x) "true" ->_(beta) x{x:="true"} =^"def" "true" = V$
+
+== b.
+
+$lambda x:Bool.2 =^"def" lambda x:Bool. "succ"^2("zero") = lambda x:Bool. "succ(succ(zero))"\
+= lambda x:Bool. "succ(succ("V"))" = lambda x:Bool. "succ("V")" = lambda x:Bool. V = V
+$
+
 == c.
+
+$lambda x:Bool ."pred"(2) = lambda x:Bool ."succ(zero)"\
+= lambda x:Bool . V = V
+$
+
+== d.
+
+$lambda y: Nat. (lambda x:Bool."pred"(2)) "true" = lambda y: Nat. (lambda x:Bool."pred"("succ(succ(zero))")) "true"\
+= lambda y: Nat. (lambda x:Bool."succ(zero)") "true"\
+= lambda y: Nat. (lambda x:Bool. V) V ->_(beta) lambda y: Nat. V{x:=V}\
+= lambda y: Nat. V = V
+
+$
+
+== e.
+
+$x$ no es un valor
+
+== f.
+
+succ(succ(zero)) = succ(succ(V)) = succ(V) = V
+
+#pagebreak()
+
+= 16
+
+== I.
+
+$(lambda x:Bool. x) "true" ->_beta x{x:="true"} = "true"$ 
+
+Es un programa y es un valor (true)
+
+== II.
+
+$lambda x:Nat."pred(succ("x"))"$
+
+Es un programa, y es un valor (la función $lambda$)
+
+== III.
+
+$lambda x:Nat."pred(succ("y"))"$
+
+No es un programa
+
+== IV.
+
+$(lambda x:Bool. "pred(isZero("(x))) "true" ->_beta "pred(isZero("(x))){x:="true"} = "pred(isZero((true)))" $
+
+No es un programa, no tipa
+
+
+== V.
+
+$(lambda f:Nat -> Bool. f "zero")" "(lambda x:Nat. "isZero"(x))$
+
+Es un programa, no hay variables libres, el 2do lambda suelta algo de tipo Nat, y la 1era recibe algo de tipo Nat, por lo que tipa
+
+== VI.
+
+$(lambda f: Nat-> Bool. x)" "(lambda x:Nat. "isZero"(x))$
+
+No es un programa
+
+== VII.
+
+$(lambda f :Nat -> Bool. f " " "pred(zero)")" "(lambda x: Nat. "isZero"(x))$
+
+Es un programa, mismo argumento que en el *V*, aunque devuelve error
+
+== VIII.
+
+$"fix" lambda y:Nat. "succ"(y)$
+
+Es un programa, pero nunca termina
+
+#pagebreak()
+
+= 20
+
+#pagebreak()
+
+= 22
+
+#pagebreak()
+
+= 23
+
+#pagebreak()
+
+= 24
+
+#pagebreak()
+
+= 27
