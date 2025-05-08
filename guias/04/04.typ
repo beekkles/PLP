@@ -505,13 +505,13 @@ succ(succ(zero)) = succ(succ(V)) = succ(V) = V
 
 $(lambda x:Bool. x) "true" ->_beta x{x:="true"} = "true"$ 
 
-Es un programa y es un valor (true)
+Es un programa, forma normal, valor
 
 == II.
 
 $lambda x:Nat."pred(succ("x"))"$
 
-Es un programa, y es un valor (la función $lambda$)
+Es un programa, forma normal, valor
 
 == III.
 
@@ -523,7 +523,7 @@ No es un programa
 
 $(lambda x:Bool. "pred(isZero("(x))) "true" ->_beta "pred(isZero("(x))){x:="true"} = "pred(isZero((true)))" $
 
-No es un programa, no tipa
+No es un programa
 
 
 == V.
@@ -531,6 +531,8 @@ No es un programa, no tipa
 $(lambda f:Nat -> Bool. f "zero")" "(lambda x:Nat. "isZero"(x))$
 
 Es un programa, no hay variables libres, el 2do lambda suelta algo de tipo Nat, y la 1era recibe algo de tipo Nat, por lo que tipa
+
+Forma normal, valor
 
 == VI.
 
@@ -542,13 +544,13 @@ No es un programa
 
 $(lambda f :Nat -> Bool. f " " "pred(zero)")" "(lambda x: Nat. "isZero"(x))$
 
-Es un programa, mismo argumento que en el *V*, aunque devuelve error
+Es un programa, mismo argumento que en el *V*, forma normal, error
 
 == VIII.
 
 $"fix" lambda y:Nat. "succ"(y)$
 
-Es un programa, pero nunca termina
+Es un programa, forma normal, pero nunca termina... ¿runtime error?
 
 #pagebreak()
 
