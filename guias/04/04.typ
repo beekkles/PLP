@@ -466,13 +466,17 @@ $=^"def" (y" "(lambda w:sigma." "(lambda z: tau." "v" "z)" "w))$
 
 == a.
 
-$(lambda x:Bool. x) "true" ->_(beta) x{x:="true"} =^"def" "true" = V$
+$(lambda x:Bool. x) "true" ->_(beta) "true"$
+
+Es valor.
 
 == b.
 
 $lambda x:Bool.2 =^"def" lambda x:Bool. "succ"^2("zero") = lambda x:Bool. "succ(succ(zero))"\
-= lambda x:Bool. "succ(succ("V"))" = lambda x:Bool. "succ("V")" = lambda x:Bool. V = V
+->_"E-Succ" lambda x:Bool. "succ(zero)" ->_"E-Succ" lambda x:Bool. "zero" ->_beta = "zero"
 $
+
+Es valor.
 
 == c.
 
@@ -555,6 +559,8 @@ Es un programa, forma normal, pero nunca termina... ¿runtime error?
 #pagebreak()
 
 = 20
+
+
 
 #pagebreak()
 
