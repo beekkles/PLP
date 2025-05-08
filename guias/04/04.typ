@@ -268,6 +268,8 @@ Comparamos:
     )
 )
 
+y el original:
+
 #prooftree(
     imi($Gamma tack lambda x: Bool -> Bool. M:Bool -> Bool -> Bool$,
         $Gamma, x:Bool -> Bool tack M:Bool$
@@ -278,3 +280,172 @@ Comparamos:
 
 = 9
 
+== a. $sigma -> tau -> sigma$
+
+#prooftree(
+    tabs($tack lambda x:sigma. lambda y:tau . x : sigma -> tau -> sigma$,
+        tabs($x:sigma tack lambda y:tau . x : tau -> sigma$,
+            tvar($x:sigma, y:tau tack x:sigma$)
+        )
+    )
+)
+
+== b. $(sigma -> tau -> rho) -> (sigma -> tau) -> sigma -> rho$
+
+
+#prooftree(
+    tabs($lambda x : sigma -> tau -> rho. lambda y : sigma -> tau. lambda z:sigma. x" "z" "(y " "z) : (sigma -> tau -> rho) -> (sigma -> tau) -> sigma -> rho$,
+        tabs($x : sigma -> tau -> rho tack lambda y : sigma -> tau. lambda z:sigma. x" "z" "(y " "z) : (sigma -> tau) -> sigma -> rho$,
+            tabs($x : sigma -> tau -> rho,y : sigma -> tau tack lambda z:sigma. x" "z" "(y " "z) : sigma -> rho$,
+                tapp($Gamma = {x : sigma -> tau -> rho,y : sigma -> tau, z:sigma} tack (x" "z)" "(y " "z) : rho$,
+                    tapp($Gamma tack x" "z: tau -> rho $,
+                        tvar($Gamma tack x :sigma -> tau -> rho$),
+                        tvar($Gamma tack z : sigma$)
+                    ),
+                    tapp($Gamma tack y" "z: tau$,
+                        tvar($Gamma tack y: sigma -> tau$),
+                        tvar($Gamma tack z: sigma$)
+                    )
+                )
+            )
+        )
+    )
+)
+== c. $(sigma -> tau -> rho) -> tau -> sigma -> rho$
+
+#prooftree(
+    tabs($tack lambda x : sigma -> tau -> rho. lambda y : tau. lambda z: sigma. x" "z" "y: (sigma -> tau -> rho) -> tau -> sigma -> rho$,
+        tabs($x : (sigma -> tau -> rho) tack lambda y : tau. lambda z: sigma. x" "z" "y:  tau -> sigma -> rho$,
+            tabs($x : (sigma -> tau -> rho), y: tau tack lambda z: sigma. x" "z" "y:  sigma -> rho$,
+                tapp($Gamma = {x : (sigma -> tau -> rho), y: tau, z: sigma} tack x" "z" "y:  rho$,
+                    tapp($Gamma tack x" "z: tau -> rho$,
+                        tvar($Gamma tack x:sigma->tau->rho$),
+                        tvar($Gamma tack z: sigma$)
+                    ),
+                    tvar($Gamma tack  y :tau$)
+                )
+            )
+        )
+    )
+)
+
+
+== d. $(tau -> rho) -> (sigma -> tau) -> sigma -> rho$
+
+
+#prooftree(
+    tabs($tack lambda x: tau->rho. lambda y : sigma -> tau. lambda z: sigma. x" "(y" "z):(tau -> rho) -> (sigma -> tau) -> sigma -> rho$,
+        tabs($x: tau->rho tack lambda y : sigma -> tau. lambda z: sigma. x" "(y" "z):(sigma -> tau) -> sigma -> rho$,
+            tabs($x: (tau->rho), y : (sigma -> tau) tack lambda z: sigma. x" "(y" "z):sigma -> rho$,
+                tapp($Gamma = {x: (tau->rho), y : (sigma -> tau), z:sigma} tack x" "(y" "z):rho$,
+                    tvar($Gamma tack x: tau -> rho$),
+                    tapp($Gamma tack y" "z: tau$,
+                        tvar($Gamma tack y: sigma -> tau$),
+                        tvar($Gamma z: sigma$)
+                    )
+                )
+            )
+        )
+    )
+)
+
+#pagebreak()
+
+= 10
+
+== a.
+
+#prooftree(
+    tiszero($x:sigma tack "isZero(succ"(x)):tau = Bool$,
+        tsucc($x:sigma tack "succ"(x) : Nat $,
+            tvar($x:sigma tack x: sigma = Nat$)
+        )
+    )
+)
+
+$sigma = Nat, tau = Bool$
+
+== b.
+
+#prooftree(
+    tapp($tack (lambda x :sigma .x)(lambda y:Bool."zero"):sigma$,
+        tabs($tack (lambda x :sigma .x): sigma -> sigma$,
+            tvar($x:sigma tack x:sigma $)
+        ),
+        tabs($tack (lambda y:Bool."zero"): sigma = Bool -> tau$,
+            tzero($y:Bool tack "zero" : tau = Nat$)
+        )
+    )
+)
+
+$sigma = Bool -> Nat$
+
+== c.
+
+$y : tau tack "if" (lambda x : sigma. x) "then" y "else" "succ(zero)" : sigma$
+
+Se nota a simple vista que no tipa, $(lambda x: sigma. x)$ es de $sigma -> sigma$
+
+== d.
+
+#prooftree(
+    tapp($x:sigma tack x" "y:tau$,
+        tvar($x:sigma tack x: rho -> tau = sigma$),
+        rule($x: sigma tack y:rho$)
+    )
+)
+
+Queda trabado ahí, $y:rho$ no está en el contexto.
+== e.
+
+#prooftree(
+    tapp($x:sigma, y:tau tack x" "y:tau$,
+        tvar($x:sigma, y:tau tack x: tau -> tau = sigma$),
+        tvar($x: sigma, y:tau tack y:tau$)
+    )
+)
+
+$sigma = tau -> tau$
+
+== f.
+
+#prooftree(
+    tapp($x: sigma tack x "true" : tau$,
+        tvar($x:sigma tack x: Bool -> tau $),
+        ttrue($x:sigma tack "true" : Bool $)
+    )
+)
+
+$sigma = Bool -> tau$
+
+== g.
+
+#prooftree(
+    tapp($x: sigma tack x "true" : sigma$,
+    rule($x:sigma tack x: Bool -> sigma$),
+        ttrue($x:sigma tack "true":Bool$)
+    )
+)
+
+Pero $sigma != Bool -> sigma$, no tipa.
+
+== h.
+
+#prooftree(
+    tapp($x:sigma tack x " " x:tau$,
+        rule($x:sigma tack x: rho -> tau$),
+        rule($x:sigma tack x: rho$)
+    )
+)
+
+Pero $tau != rho -> tau$, no tipa.
+
+#pagebreak()
+
+= 13
+
+== a.
+
+== b.
+
+== c.
