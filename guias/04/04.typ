@@ -472,26 +472,28 @@ Es valor.
 
 == b.
 
-$lambda x:Bool.2 =^"def" lambda x:Bool. "succ"^2("zero") = lambda x:Bool. "succ(succ(zero))"\
-->_"E-Succ" lambda x:Bool. "succ(zero)" ->_"E-Succ" lambda x:Bool. "zero" ->_beta = "zero"
-$
+$lambda x:Bool.2 =^"def" lambda x:Bool. "succ"^2("zero") = lambda x:Bool. "succ(succ(zero))" ->_beta "succ(succ(zero))"$
 
 Es valor.
 
 == c.
 
-$lambda x:Bool ."pred"(2) = lambda x:Bool ."succ(zero)"\
-= lambda x:Bool . V = V
+$lambda x:Bool ."pred"(2) = lambda x:Bool ."pred(succ(succ(zero)))"\
+->_"E-PredSucc" lambda x:Bool. "succ(zero)" ->_beta "succ(zero)"
 $
+
+Es valor
 
 == d.
 
-$lambda y: Nat. (lambda x:Bool."pred"(2)) "true" = lambda y: Nat. (lambda x:Bool."pred"("succ(succ(zero))")) "true"\
-= lambda y: Nat. (lambda x:Bool."succ(zero)") "true"\
-= lambda y: Nat. (lambda x:Bool. V) V ->_(beta) lambda y: Nat. V{x:=V}\
-= lambda y: Nat. V = V
-
+$lambda y: Nat. (lambda x:Bool."pred"(2)) "true"\
+= lambda y: Nat. (lambda x:Bool."pred"("succ(succ(zero))")) "true"\
+->_"E-Pred_Succ" lambda y: Nat. (lambda x:Bool."succ(zero)") "true"\
+->_beta lambda y: Nat. "succ(zero)"\
+->_beta "succ(zero)"
 $
+
+Es valor
 
 == e.
 
@@ -499,7 +501,9 @@ $x$ no es un valor
 
 == f.
 
-succ(succ(zero)) = succ(succ(V)) = succ(V) = V
+succ(succ(zero)) = $underline(2)$
+
+Es valor
 
 #pagebreak()
 
@@ -560,7 +564,104 @@ Es un programa, forma normal, pero nunca termina... ¿runtime error?
 
 = 20
 
+== a.
 
+#let tpares = rule.with(name: [T-Pares])
+#let tpi1 = rule.with(name: [T-$pi_1$])
+#let tpi2 = rule.with(name: [T-$pi_2$])
+
+#prooftree(
+    tpares($Gamma tack angle.l M,N angle.r : sigma times tau $,
+        ($Gamma tack M:sigma $),
+        ($Gamma tack N:tau $)
+    )
+)
+
+#prooftree(
+    tpi1($Gamma tack pi_1 (M)$,
+        ($Gamma tack M:sigma times tau$)
+    )
+)
+
+
+#prooftree(
+    tpi2($Gamma tack pi_2 (M)$,
+        ($Gamma tack M:sigma times tau$)
+    )
+)
+== b.
+
+=== I. $sigma -> tau -> (sigma times tau)$
+
+#prooftree(
+    tabs($tack lambda x: sigma. lambda y: tau. angle.l x,y angle.r : sigma -> tau -> (sigma times tau)$,
+        tabs($x:sigma tack lambda y:tau. angle.l x,y angle.r: tau -> (sigma times tau)$,
+            tpares($Gamma = {x:sigma, y:tau} tack angle.l x,y angle.r: (sigma times tau)$,
+                tvar($Gamma tack x:sigma$),
+                tvar($Gamma tack y:tau$)
+            )
+        )
+    )
+)
+
+=== II. $(sigma times tau) -> sigma$ y $(sigma times tau) -> tau$
+
+*Caso 1*
+
+#prooftree(
+    tabs($tack lambda angle.l x,y angle.r:(sigma times tau).x:(sigma times tau)-> sigma$,
+        tpi1($angle.l x,y angle.r:(sigma times tau) tack x:sigma$,
+            tvar($angle.l x,y angle.r:(sigma times tau), x:sigma tack x:sigma$)
+        )
+    )
+)
+
+*Caso 2*
+
+#prooftree(
+    tabs($tack lambda angle.l x,y angle.r:(sigma times tau).y :(sigma times tau) -> tau $,
+        tpi2($angle.l x,y angle.r:(sigma times tau) tack y:tau$,
+            tvar($angle.l x,y angle.r, y:tau tack y:tau$)
+        )
+    )
+)
+
+=== III. $(sigma times tau) -> (tau times sigma)$
+
+#prooftree(
+    rule($tack lambda angle.l x,y angle.r:(sigma times tau). angle.l y,x angle.r:(sigma times tau) -> (tau times sigma) $)
+)
+
+=== IV. $((sigma times tau) times rho) -> (sigma times (tau times rho))$ y $(sigma times (tau times rho)) -> ((sigma times tau) times rho)$
+
+#let sal = $angle.l$
+#let sar = $angle.r$
+
+*Caso 1*
+
+#prooftree(
+    rule($tack lambda angle.l angle.l x,y angle.r ,z angle.r:((sigma times tau) times rho). sal x,sal y,z sar sar :((sigma times tau) times rho) -> (sigma times (tau times rho))$)
+)
+
+*Caso 2*
+
+#prooftree(
+    rule($tack lambda sal x,sal y,z sar sar :(sigma times (tau times rho)). angle.l angle.l x,y angle.r ,z angle.r :(sigma times (tau times rho)) -> ((sigma times tau) times rho)$)
+)
+
+=== V. $((sigma times tau) -> rho) -> (sigma -> tau -> rho)$ y $(sigma -> tau -> rho) -> ((sigma times tau) -> rho)$
+
+*Caso 1*
+
+#prooftree(
+    rule($tack lambda sal x,y sar:(sigma times tau).x" "(y" "((lambda sal v,w sar:(sigma times tau)." "z)" "x" "y)): ((sigma times tau) -> rho) -> (sigma -> tau -> rho)$)
+)
+
+*Caso 2*
+
+#prooftree(
+    rule($tack $)
+)
 
 #pagebreak()
 
