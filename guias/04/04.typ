@@ -578,17 +578,18 @@ Es un programa, forma normal, pero nunca termina... ¿runtime error?
 )
 
 #prooftree(
-    tpi1($Gamma tack pi_1 (M)$,
+    tpi1($Gamma tack pi_1 (M):sigma$,
         ($Gamma tack M:sigma times tau$)
     )
 )
 
 
 #prooftree(
-    tpi2($Gamma tack pi_2 (M)$,
+    tpi2($Gamma tack pi_2 (M):tau$,
         ($Gamma tack M:sigma times tau$)
     )
 )
+
 == b.
 
 === I. $sigma -> tau -> (sigma times tau)$
@@ -609,9 +610,9 @@ Es un programa, forma normal, pero nunca termina... ¿runtime error?
 *Caso 1*
 
 #prooftree(
-    tabs($tack lambda angle.l x,y angle.r:(sigma times tau).x:(sigma times tau)-> sigma$,
-        tpi1($angle.l x,y angle.r:(sigma times tau) tack x:sigma$,
-            tvar($angle.l x,y angle.r:(sigma times tau), x:sigma tack x:sigma$)
+    tabs($tack lambda x:(sigma times tau).pi_1 (x):(sigma times tau)-> sigma$,
+        tpi1($x:(sigma times tau) tack pi_1 (x):sigma$,
+            tvar($x:(sigma times tau) tack x:(sigma times tau)$)
         )
     )
 )
@@ -619,9 +620,9 @@ Es un programa, forma normal, pero nunca termina... ¿runtime error?
 *Caso 2*
 
 #prooftree(
-    tabs($tack lambda angle.l x,y angle.r:(sigma times tau).y :(sigma times tau) -> tau $,
-        tpi2($angle.l x,y angle.r:(sigma times tau) tack y:tau$,
-            tvar($angle.l x,y angle.r, y:tau tack y:tau$)
+    tabs($tack lambda y:(sigma times tau).pi_2 (y):(sigma times tau)-> tau$,
+        tpi2($y:(sigma times tau) tack pi_2 (y):tau$,
+            tvar($y:(sigma times tau) tack y:(sigma times tau)$)
         )
     )
 )
@@ -629,7 +630,16 @@ Es un programa, forma normal, pero nunca termina... ¿runtime error?
 === III. $(sigma times tau) -> (tau times sigma)$
 
 #prooftree(
-    rule($tack lambda angle.l x,y angle.r:(sigma times tau). angle.l y,x angle.r:(sigma times tau) -> (tau times sigma) $)
+    tabs($tack lambda x:(sigma times tau). angle.l pi_2(x),pi_1(x) angle.r:(sigma times tau) -> (tau times sigma)$,
+        tpares($x:(sigma times tau) tack angle.l pi_2(x),pi_1(x) angle.r:(tau times sigma)$,
+            tpi2($x:(sigma times tau) tack pi_2(x):tau$,
+                tvar($x:(sigma times tau) tack x:(sigma times tau)$)
+            ),
+            tpi1($x:(sigma times tau) tack pi_1(x):sigma$,
+                tvar($x:(sigma times tau) tack x: (sigma times tau)$)
+            )
+        )
+    )
 )
 
 === IV. $((sigma times tau) times rho) -> (sigma times (tau times rho))$ y $(sigma times (tau times rho)) -> ((sigma times tau) times rho)$
@@ -640,8 +650,18 @@ Es un programa, forma normal, pero nunca termina... ¿runtime error?
 *Caso 1*
 
 #prooftree(
-    rule($tack lambda angle.l angle.l x,y angle.r ,z angle.r:((sigma times tau) times rho). sal x,sal y,z sar sar :((sigma times tau) times rho) -> (sigma times (tau times rho))$)
+    tabs($tack lambda x:((sigma times tau) times rho). sal pi_1(pi_1(x)), sal pi_2(pi_1(x)), pi_2(x) sar sar :((sigma times tau) times rho) -> (sigma times (tau times rho))$,
+        tpares($ Gamma = x:((sigma times tau) times rho) tack sal pi_1(pi_1(x)), sal pi_2(pi_1(x)), pi_2(x) sar sar :(sigma times (tau times rho))$,
+            tpi1($Gamma tack pi_1(pi_1(x)):sigma$),
+            tpares($Gamma tack sal pi_2(pi_1(x)), pi_2(x) sar:(tau times rho)$,
+                tpi2($Gamma tack pi_2(pi_1(x)):tau$),
+                tpi2($Gamma tack pi_2(x):rho$)
+            )
+        )
+    )
 )
+
+#pagebreak()
 
 *Caso 2*
 
