@@ -652,21 +652,47 @@ Es un programa, forma normal, pero nunca termina... ¿runtime error?
 #prooftree(
     tabs($tack lambda x:((sigma times tau) times rho). sal pi_1(pi_1(x)), sal pi_2(pi_1(x)), pi_2(x) sar sar :((sigma times tau) times rho) -> (sigma times (tau times rho))$,
         tpares($ Gamma = x:((sigma times tau) times rho) tack sal pi_1(pi_1(x)), sal pi_2(pi_1(x)), pi_2(x) sar sar :(sigma times (tau times rho))$,
-            tpi1($Gamma tack pi_1(pi_1(x)):sigma$),
+            tpi1($Gamma tack pi_1(pi_1(x)):sigma$,
+                tpi1($Gamma tack pi_1(x):(sigma times tau)$,
+                    tvar($Gamma tack x:(sigma times tau) times rho$)
+                )
+            ),
             tpares($Gamma tack sal pi_2(pi_1(x)), pi_2(x) sar:(tau times rho)$,
-                tpi2($Gamma tack pi_2(pi_1(x)):tau$),
-                tpi2($Gamma tack pi_2(x):rho$)
+                tpi2($Gamma tack pi_2(pi_1(x)):tau$,
+                    tpi1($Gamma tack pi_1(x):(sigma times tau)$,
+                        tvar($Gamma tack x:(sigma times tau) times rho$)
+                    )
+                ),
+                tpi2($Gamma tack pi_2(x):rho$,
+                    tvar($Gamma tack x:(sigma times tau) times rho$)
+                )
             )
         )
     )
 )
 
-#pagebreak()
-
 *Caso 2*
 
 #prooftree(
-    rule($tack lambda sal x,sal y,z sar sar :(sigma times (tau times rho)). angle.l angle.l x,y angle.r ,z angle.r :(sigma times (tau times rho)) -> ((sigma times tau) times rho)$)
+    tabs($tack lambda x :(sigma times (tau times rho)). sal sal pi_1(x) , pi_1(pi_2(x)) sar , pi_2(pi_2(x)) sar :(sigma times (tau times rho)) -> ((sigma times tau) times rho)$,
+        tpares($Gamma = x :(sigma times (tau times rho)) tack sal sal pi_1(x) , pi_1(pi_2(x)) sar , pi_2(pi_2(x)) sar :((sigma times tau) times rho)$,
+            tpares($Gamma tack sal pi_1(x) , pi_1(pi_2(x)) sar:(sigma times tau)$,
+                tpi1($Gamma tack pi_1(x):sigma$,
+                    tvar($Gamma tack x:(sigma times (tau times rho))$)
+                ),
+                tpi1($Gamma tack pi_1(pi_2(x))):tau$,
+                    tpi2($Gamma pi_2(x):(tau times rho)$,
+                        tvar($Gamma tack x:sigma times (tau times rho)$)
+                    )
+                )
+            ),
+            tpi2($Gamma tack pi_2(pi_2(x)):rho$,
+                tpi1($Gamma tack pi_2(x):(tau times rho)$,
+                    tvar($Gamma tack x: (sigma times (tau times rho))$)
+                )
+            )
+        )
+    )
 )
 
 === V. $((sigma times tau) -> rho) -> (sigma -> tau -> rho)$ y $(sigma -> tau -> rho) -> ((sigma times tau) -> rho)$
@@ -674,18 +700,78 @@ Es un programa, forma normal, pero nunca termina... ¿runtime error?
 *Caso 1*
 
 #prooftree(
-    rule($tack lambda sal x,y sar:(sigma times tau).x" "(y" "((lambda sal v,w sar:(sigma times tau)." "z)" "x" "y)): ((sigma times tau) -> rho) -> (sigma -> tau -> rho)$)
+    tabs($tack lambda f:(sigma times tau) -> rho. lambda x:sigma. lambda y:tau. f sal x,y sar:((sigma times tau) -> rho) -> (sigma -> tau -> rho)$,
+        tabs($f:(sigma times tau) -> rho tack lambda x:sigma. lambda y:tau. f sal x,y sar: sigma -> tau -> rho$,
+            tabs($f:(sigma times tau), x:sigma -> rho tack lambda y:tau. f sal x,y sar: tau -> rho$,
+                tapp($Gamma = f:(sigma times tau)-> rho, x:sigma,y:tau  tack f sal x,y sar: rho$,
+                    tvar($Gamma tack f : (sigma times tau) -> rho$),
+                    tpares($Gamma tack sal x,y sar:(sigma times tau)$,
+                        tvar($Gamma tack x:sigma$),
+                        tvar($Gamma tack y:tau$)
+                    )
+                )
+            )
+        )
+    )
 )
 
 *Caso 2*
 
 #prooftree(
-    rule($tack $)
+    tabs($lambda f:(sigma -> tau -> rho). lambda p:(sigma times tau).f" " pi_1(p)" "pi_2(p):(sigma -> tau -> rho) -> ((sigma times tau) -> rho)$,
+        tabs($f:(sigma -> tau -> rho) tack lambda p:(sigma times tau).f" " pi_1(p)" "pi_2(p):((sigma times tau) -> rho)$,
+            tapp($Gamma = f:(sigma -> tau -> rho),p:(sigma times tau) tack f" " pi_1(p)" "pi_2(p): rho$,
+                tapp($Gamma tack f " " pi_1(p): tau -> rho$,
+                    tvar($Gamma tack f:sigma -> tau -> rho $),
+                    tpi1($Gamma tack pi_1(p): sigma$,
+                        tvar($Gamma tack p: (sigma times tau)$)
+                    )
+                ),
+                tpi2($Gamma tack pi_2(p) : tau $,
+                    tvar($Gamma tack p:(sigma times tau)$)
+                )
+            )
+        )
+    )
 )
+
+== c.
+
+$V::= dots | angle.l V,V angle.r $
+
+== d.
+
+*Si* $M -> M'$ *entonces* $pi_1(M) -> pi_1(M')$
+
+*Si* $M -> M'$ *entonces* $pi_2(M) -> pi_2(M')$
+
+$pi_1(angle.l V,W angle.r) -> V$
+
+$pi_2(angle.l V,W angle.r) -> W$
+
+*Si* $M -> M'$ *entonces* $angle.l M, N angle.r -> angle.l M',N angle.r$
+
+*Si* $N -> N'$ *entonces* $angle.l V, N angle.r -> angle.l V, N' angle.r$
+
+== e.
+
+La demostración queda de ejercicio al lector
 
 #pagebreak()
 
 = 22
+
+
+== a.
+
+*Primer ejemplo*
+
+#tree[case zero :: succ(zero) $[]_Nat$ of ${[] ~> "false" | x::x s ~> "izZero"(x)} ->> "true"$
+    []
+]
+
+
+*Segundo ejemplo*
 
 #pagebreak()
 
