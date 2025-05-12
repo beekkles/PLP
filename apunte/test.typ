@@ -1,65 +1,3 @@
-= Sintaxis y tipado
-== Cosas a tener en cuenta
-
-#image("image-20.png")
-
-
-== Tipos y términos
-#image("image-12.png")
-== Axiomas y reglas de tipado
-#image("image-13.png", height: 6cm)
-#image("image-14.png", height: 6cm)
-
-= Semántica operacional
-
-#image("image-15.png", height: 1.8cm)
-
-== Reglas de evaluacion en un paso
-== Propiedades de la evaluación:
-#image("image-22.png", height: 9cm)
-#image("image-16.png", height: 3.5cm)
-
-#set text(size: 15pt)
-Ejemplos:
-
-$mu$:
-
-$underbrace((lambda x: "Nat".x)(lambda y: "Nat".y), M_1)" "underbrace(3, M_2) ->_beta underbrace((lambda y: "Nay".y), M_1 ')" "underbrace(3, M_2)$
-
-$nu$:
-
-$underbrace((lambda x: "Nat"."succ"(x)), V)underbrace(((lambda y: "Nat".y)" "3), M_2) ->_beta underbrace((lambda x:"Nat"."succ"(x)), V)" "underbrace(3,M_2 ')$
-
-$beta$:
-
-$(lambda x: "Nat"."succ"(x))" "2 -> "succ"(x) {x::=2}= "succ"(2)$
-
-#image("image-17.png", height: 4cm)
-
-#image("image-18.png", height: 7cm)
-
-#image("image-23.png", height: 1.4cm)
-
-Podemos también expresar macros, como:
-
-$"curry"_(sigma,tau,delta) = lambda f: sigma times tau -> delta. lambda x: sigma. lambda y: tau. f angle.l x,y angle.r$
-
-*IMPORTANTE:
-*
-
-A la hora de hacer reglas de tipado, hay que hacer una para cada expresión nueva.
-
-Luego hay que extender el conjunto de valores.
-
-Hay que hacer reglas de congruencia que mantengan determinismo (ir reduciendo congruentemente parte por parte)
-
-Hay que hacer axiomas para cada valor nuevo del conjunto de valores
-
-#pagebreak()
-
-#set text(size: 10pt)
-
-
 #import "@preview/arborly:0.3.0": tree
 #import "@preview/curryst:0.5.1": rule, prooftree
 
@@ -652,41 +590,10 @@ $"foldr" V::W "base" ~> N, "rec"(h,r) ~> O -> R'$
 
 = 23
 
-Extendemos el punto anterior con $M,N,O ::= ... | "map"(M,N)$
+#pagebreak()
 
-Reglas de tipado:
+= 24
 
-#prooftree(
-    rule($Gamma tack "map"(M,N):[sigma]$,
-        $Gamma tack M:tau -> sigma$,$N:[tau]$
-    )
-)
-
-Reglas de congruencia:
-
-*Si* $M->M'$ *entonces* $"map"(M,N) -> "map"(M',N)$
-
-*Si* $N->N'$ *entonces* $"map"(V,N) -> "map"(V,N')$
-
-Axiomas:
-
-*Si* $N = []_sigma$ *entonces* $"map"(M,N)->[]_sigma$
-
-#prooftree(
-    rule($"map"(M,V) -> V'::W'$,
-    $N = V::W$,$M" "V = V'$,$"map"(M,W)=W'$
-))
-
-El conjunto de valores no se extiende
+#pagebreak()
 
 = 27
-
-#image("image-24.png")
-
-#image("image-25.png")
-
-#image("image-26.png")
-
-#image("image-27.png")
-
-#image("image-28.png")
