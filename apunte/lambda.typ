@@ -19,6 +19,21 @@
 #image("image-22.png", height: 9cm)
 #image("image-16.png", height: 3.5cm)
 
+#set text(size: 16pt)
+Ejemplos:
+
+$mu$:
+
+$underbrace((lambda x: "Nat".x)(lambda y: "Nat".y), M_1)" "underbrace(3, M_2) ->_beta underbrace((lambda y: "Nay".y), M_1 ')" "underbrace(3, M_2)$
+
+$nu$:
+
+$underbrace((lambda x: "Nat"."succ"(x)), V)underbrace(((lambda y: "Nat".y)" "3), M_2) ->_beta underbrace((lambda x:"Nat"."succ"(x)), V)" "underbrace(3,M_2 ')$
+
+$beta$:
+
+$(lambda x: "Nat"."succ"(x))" "2 -> "succ"(x) {x::=2}= "succ"(2)$
+
 #image("image-17.png", height: 4cm)
 
 #image("image-18.png", height: 7cm)
